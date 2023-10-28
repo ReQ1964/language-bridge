@@ -14,6 +14,8 @@ const UnorderedList = styled.ul<{ isOpen?: boolean }>`
 	align-items: center;
 	gap: 1rem;
 	width: 100%;
+	transition: 0.5s;
+	transform: translateY(${(props) => (props.isOpen ? '0%' : '-120%')});
 `;
 
 const NextLink = styled(Link)`

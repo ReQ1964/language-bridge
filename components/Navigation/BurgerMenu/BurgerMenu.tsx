@@ -35,7 +35,7 @@ const BurgerMenu = () => {
 				? nextImage(menu_close, 'Icon to close the navigation bar')
 				: nextImage(menu_burger, 'Icon to open the navigation bar')}
 
-			<S.UnorderedList>
+			<S.UnorderedList isOpen={isOpen}>
 				{pages.map((page) => (
 					<li key={page.name}>
 						<S.NextLink href={page.path}>{capitalizeWord(page.name)}</S.NextLink>
