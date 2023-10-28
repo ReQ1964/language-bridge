@@ -11,8 +11,8 @@ export const TopNavbar = () => {
 			<Logo />
 			<Image
 				src={menu_account}
-				width={32}
-				height={32}
+				width={34}
+				height={34}
 				alt="Icon to go to the account page"
 			/>
 		</S.Navbar>
