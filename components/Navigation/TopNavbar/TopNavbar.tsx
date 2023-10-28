@@ -1,5 +1,10 @@
+import BurgerMenu from '@/components/Navigation/BurgerMenu/BurgerMenu';
 import S from './TopNavbar.styles';
 
 export const TopNavbar = () => {
-	return <S.Navbar></S.Navbar>;
+	return (
+		<S.Navbar>
+			<BurgerMenu />
+		</S.Navbar>
+	);
 };
