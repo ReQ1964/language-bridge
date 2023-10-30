@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const NextImage = styled(Image)`
 	cursor: pointer;
-	margin-top: 6px;
+	margin-top: 5px;
 `;
 
 const UnorderedList = styled.ul<{ isOpen?: boolean }>`
@@ -23,7 +23,7 @@ const UnorderedList = styled.ul<{ isOpen?: boolean }>`
 `;
 
 const NextLink = styled(Link)`
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	transition: border 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
 	&:hover {

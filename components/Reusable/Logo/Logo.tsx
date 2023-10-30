@@ -5,7 +5,7 @@ import S from './Logo.styles';
 const Logo = () => {
 	return (
 		<Link href="/">
-			<S.H1>Language Bridge</S.H1>
+			<S.H3>Language Bridge</S.H3>
 		</Link>
 	);
 };

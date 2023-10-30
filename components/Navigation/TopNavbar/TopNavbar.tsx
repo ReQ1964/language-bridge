@@ -13,8 +13,8 @@ export const TopNavbar = () => {
 			<S.RightContainer>
 				<S.AccountIcon
 					src={menu_account}
-					width={34}
-					height={34}
+					width={29}
+					height={29}
 					alt="Icon to go to the account page"
 				/>
 				<LanguagePicker />

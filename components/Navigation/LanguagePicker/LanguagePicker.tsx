@@ -13,8 +13,8 @@ const items: MenuProps['items'] = [
 			<S.DropdownContainer>
 				<Image
 					src={gb_icon}
-					width={24}
-					height={24}
+					width={22}
+					height={22}
 					alt="Flag of the United Kingdom"
 				/>
 				<p>ENG</p>
@@ -25,7 +25,7 @@ const items: MenuProps['items'] = [
 		key: '2',
 		label: (
 			<S.DropdownContainer>
-				<Image src={es_icon} width={24} height={24} alt="Flag of Spain" />
+				<Image src={es_icon} width={22} height={22} alt="Flag of Spain" />
 				<p>SPA</p>
 			</S.DropdownContainer>
 		),
@@ -37,14 +37,14 @@ const LanguagePicker = () => (
 		<S.DropdownButton>
 			<Image
 				src={gb_icon}
-				width={25}
-				height={25}
+				width={24}
+				height={24}
 				alt="Flag of the United Kingdom"
 			/>
 			<Image
 				src={show_more_icon}
-				width={25}
-				height={25}
+				width={24}
+				height={24}
 				alt="Click to show languages to choose"
 			/>
 		</S.DropdownButton>

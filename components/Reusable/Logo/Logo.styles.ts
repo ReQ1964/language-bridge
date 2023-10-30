@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const H1 = styled.h1`
+const H3 = styled.h3`
 	color: var(--primary-color);
-	font-size: 1.6rem;
+	font-size: 1.3rem;
 `;
 
-export default { H1 };
+export default { H3 };

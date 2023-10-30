@@ -23,8 +23,8 @@ const BurgerMenu = () => {
 	const nextImage = (src: string, alt: string) => (
 		<S.NextImage
 			src={src}
-			width={34}
-			height={34}
+			width={28}
+			height={28}
 			alt={alt}
 			onClick={navigationVisibilityHandler}
 		/>
