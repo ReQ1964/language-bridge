@@ -1,6 +1,7 @@
 import BurgerMenu from '@/components/Navigation/BurgerMenu/BurgerMenu';
-import menu_account from '@/public/icons/navigation/menu_account.svg';
 import Logo from '@/components/Reusable/Logo/Logo';
+import LanguagePicker from '../LanguagePicker/LanguagePicker';
+import menu_account from '@/public/icons/navigation/menu_account.svg';
 import S from './TopNavbar.styles';
 import Image from 'next/image';
 
@@ -9,12 +10,15 @@ export const TopNavbar = () => {
 		<S.Navbar>
 			<BurgerMenu />
 			<Logo />
-			<Image
-				src={menu_account}
-				width={34}
-				height={34}
-				alt="Icon to go to the account page"
-			/>
+			<S.RightContainer>
+				<S.AccountIcon
+					src={menu_account}
+					width={34}
+					height={34}
+					alt="Icon to go to the account page"
+				/>
+				<LanguagePicker />
+			</S.RightContainer>
 		</S.Navbar>
 	);
 };
