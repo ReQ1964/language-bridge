@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import menu_burger from '@/public/icons/navigation/menu_burger.svg';
 import menu_close from '@/public/icons/navigation/menu_close.svg';
 import S from './BurgerMenu.styles';
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ storyIsOpen }: { storyIsOpen?: boolean }) => {
 	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		setIsOpen(storyIsOpen || false);
+	}, [storyIsOpen]);
 
 	const navigationVisibilityHandler = () => {
 		setIsOpen((prevState) => !prevState);
