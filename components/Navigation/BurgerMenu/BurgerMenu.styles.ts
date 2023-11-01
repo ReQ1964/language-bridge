@@ -19,7 +19,7 @@ const UnorderedList = styled.ul<{ isOpen?: boolean }>`
 	background-color: white;
 	z-index: -1;
 	transition: 0.5s;
-	transform: translate(-50%, ${(props) => (props.isOpen ? '20%' : '-100%')});
+	transform: translate(-50%, ${(props) => (props.isOpen ? '20%' : '-170%')});
 `;
 
 const NextLink = styled(Link)`

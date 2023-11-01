@@ -7,7 +7,7 @@ const Navbar = styled.nav`
 	align-items: center;
 	position: relative;
 	background-color: white;
-	padding: 0.8rem 0.5rem;
+	padding: 0.8rem 0.1rem;
 `;
 
 const RightContainer = styled.div`
