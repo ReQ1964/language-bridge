@@ -2,12 +2,19 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 const Navbar = styled.nav`
+	position: fixed;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	position: relative;
+	width: 100%;
 	background-color: white;
+	z-index: 999;
 	padding: 0.8rem 0.1rem;
+`;
+
+const NextImage = styled(Image)`
+	cursor: pointer;
+	margin-top: 5px;
 `;
 
 const RightContainer = styled.div`
@@ -21,4 +28,4 @@ const AccountIcon = styled(Image)`
 	cursor: pointer;
 `;
 
-export default { Navbar, RightContainer, AccountIcon };
+export default { Navbar, NextImage, RightContainer, AccountIcon };

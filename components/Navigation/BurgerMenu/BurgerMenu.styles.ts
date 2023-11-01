@@ -1,25 +1,18 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image';
-
-const NextImage = styled(Image)`
-	cursor: pointer;
-	margin-top: 5px;
-`;
 
 const UnorderedList = styled.ul<{ isOpen?: boolean }>`
-	position: fixed;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	left: 0%;
 	text-align: center;
 	list-style: none;
 	background-color: white;
-	z-index: -1;
-	transition: 0.5s;
-	transform: translate(-50%, ${(props) => (props.isOpen ? '20%' : '-170%')});
+	width: 100%;
+	z-index: 1;
+	transition: 0.8s;
+	transform: translateY(${(props) => (props.isOpen ? '30%' : '-170%')});
 `;
 
 const NextLink = styled(Link)`
@@ -32,4 +25,8 @@ const NextLink = styled(Link)`
 	}
 `;
 
-export default { NextImage, UnorderedList, NextLink };
+const ListItem = styled.li`
+	padding: 0.7rem 0;
+`;
+
+export default { UnorderedList, NextLink, ListItem };
