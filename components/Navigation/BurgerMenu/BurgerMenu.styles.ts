@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 const UnorderedList = styled.ul<{ isOpen?: boolean }>`
-	position: absolute;
+	position: fixed;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	left: 0%;
@@ -12,7 +13,7 @@ const UnorderedList = styled.ul<{ isOpen?: boolean }>`
 	width: 100%;
 	z-index: 1;
 	transition: 0.8s;
-	transform: translateY(${(props) => (props.isOpen ? '30%' : '-170%')});
+	transform: translateY(${(props) => (props.isOpen ? '28%' : '-170%')});
 `;
 
 const NextLink = styled(Link)`
