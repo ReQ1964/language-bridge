@@ -4,8 +4,8 @@ const DiscountContainer = styled.div`
 	background-color: var(--primary-shade3-color);
 	color: var(--secondary-color);
 	text-align: center;
-	padding: 0.6em 0.2em;
-	padding-top: 63px;
+	padding: 1rem 0.2rem;
+	padding-top: 4.4rem;
 `;
 
 export default { DiscountContainer };
