@@ -3,12 +3,11 @@ import Logo from '@/components/Reusable/Logo/Logo';
 import LanguagePicker from '../LanguagePicker/LanguagePicker';
 import menu_account from '@/public/icons/navigation/menu_account.svg';
 import S from './TopNavbar.styles';
-import Image from 'next/image';
 
-export const TopNavbar = () => {
+export const TopNavbar = ({ storyIsOpen }: { storyIsOpen?: boolean }) => {
 	return (
 		<S.Navbar>
-			<BurgerMenu />
+			<BurgerMenu storyIsOpen={storyIsOpen || false} />
 			<Logo />
 			<S.RightContainer>
 				<S.AccountIcon
