@@ -1,5 +1,11 @@
+import PremiumDiscount from '@/components/Home/PremiumDiscount/PremiumDiscount';
+
 const HomePage = () => {
-	return <></>;
+	return (
+		<>
+			<PremiumDiscount />
+		</>
+	);
 };
 
 export default HomePage;
