@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 const Navbar = styled.nav`
-	position: sticky;
-	top: 0;
+	position: fixed;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;

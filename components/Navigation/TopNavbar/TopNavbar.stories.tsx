@@ -4,6 +4,12 @@ import TopNavbar from './TopNavbar';
 
 const meta: Meta<typeof TopNavbar> = {
 	component: TopNavbar,
+	tags: ['autodocs'],
+	argTypes: {
+		storyIsOpen: {
+			description: 'Toggle expanding menu',
+		},
+	},
 };
 
 export default meta;

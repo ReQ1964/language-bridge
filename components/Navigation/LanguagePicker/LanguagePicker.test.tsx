@@ -1,34 +1,23 @@
 import LanguagePicker from './LanguagePicker';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('LanguagePicker', () => {
 	beforeEach(() => {
 		render(<LanguagePicker />);
 	});
 
-	const checkDropdownState = (button: HTMLElement, shouldContain: boolean) => {
-		const buttonAttributes = button.getAttribute('class');
-		return shouldContain
-			? expect(buttonAttributes).toContain('ant-dropdown-open')
-			: expect(buttonAttributes).not.toContain('ant-dropdown-open');
-	};
-
-	test('dropdown responds to hover', async () => {
+	it('should respond to hover actions; show/hide', async () => {
 		const button = screen.getByRole('button');
 
-		// dropdown starts out hidden
-		checkDropdownState(button, false);
-
-		// dropdown appears upon mouseover of button
-		fireEvent.mouseEnter(button);
+		await userEvent.hover(button);
 		await waitFor(() => {
-			checkDropdownState(button, true);
+			expect(button).toHaveClass('ant-dropdown-open');
 		});
 
-		//dropdown disappears when we mouseout
-		fireEvent.mouseLeave(button);
+		await userEvent.unhover(button);
 		await waitFor(() => {
-			checkDropdownState(button, false);
+			expect(button).not.toHaveClass('ant-dropdown-open');
 		});
 	});
 });

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import BurgerMenu from '@/components/Navigation/BurgerMenu/BurgerMenu';
 import BurgerIcon from '@/components/Navigation/BurgerIcon/BurgerIcon';
+import BurgerMenu from '@/components/Navigation/BurgerMenu/BurgerMenu';
 import Logo from '@/components/Reusable/Logo/Logo';
-import LanguagePicker from '../LanguagePicker/LanguagePicker';
+import LanguagePicker from '@/components/Navigation/LanguagePicker/LanguagePicker';
 import menu_account from '@/public/icons/navigation/menu_account.svg';
 import S from './TopNavbar.styles';
 
