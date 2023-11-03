@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const UnorderedList = styled.ul<{ isOpen?: boolean }>`
+const UnorderedList = styled.ul.withConfig({
+	shouldForwardProp: (prop) => prop !== 'isOpen',
+})<{ isOpen: boolean }>`
 	position: absolute;
 	display: flex;
 	flex-direction: column;
@@ -20,8 +22,8 @@ const NextLink = styled(Link)`
 	transition: border 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
 	&:hover {
-		color: black;
-		border-bottom: 1px solid black;
+		color: ${(props) => props.theme.colors.text.primary};
+		border-bottom: 1px solid ${(props) => props.theme.colors.text.primary};
 	}
 `;
 

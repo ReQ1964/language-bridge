@@ -1,12 +1,15 @@
 import '@/styles/globals.scss';
-import '@/styles/variables.scss';
 import type { AppProps } from 'next/app';
 import Layout from '@/layouts/Layout';
+import { ThemeProvider } from 'styled-components';
+import globalTheme from '@/styles/globalTheme';
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
+		<ThemeProvider theme={globalTheme}>
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</ThemeProvider>
 	);
 }
