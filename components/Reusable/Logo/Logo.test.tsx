@@ -1,9 +1,14 @@
 import Logo from './Logo';
 import { render, screen } from '@testing-library/react';
+import MockTheme from '@/helpers/MockTheme';
 
 describe('Logo', () => {
 	beforeEach(() => {
-		render(<Logo />);
+		render(
+			<MockTheme>
+				<Logo />
+			</MockTheme>
+		);
 	});
 
 	it('should render a link with correct href attribute', () => {

@@ -1,10 +1,15 @@
 import TopNavbar from './TopNavbar';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import MockTheme from '@/helpers/MockTheme';
 
 describe('TopNavbar', () => {
 	beforeEach(() => {
-		render(<TopNavbar />);
+		render(
+			<MockTheme>
+				<TopNavbar />
+			</MockTheme>
+		);
 	});
 
 	it('should render the navbar', () => {

@@ -1,11 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import BurgerMenu from './BurgerMenu';
+import MockTheme from '@/helpers/MockTheme';
 
 describe('BurgerMenu', () => {
 	const linkTexts = ['Home', 'Contact', 'About', 'Texts'];
 
 	it('should render the menu with links and be in view when isOpen is true', () => {
-		render(<BurgerMenu isOpen={true} />);
+		render(
+			<MockTheme>
+				<BurgerMenu isOpen={true} />
+			</MockTheme>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);
@@ -17,7 +22,11 @@ describe('BurgerMenu', () => {
 	});
 
 	it('should render the menu with links and be out of view when isOpen is false', () => {
-		render(<BurgerMenu isOpen={false} />);
+		render(
+			<MockTheme>
+				<BurgerMenu isOpen={false} />
+			</MockTheme>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);
@@ -29,7 +38,11 @@ describe('BurgerMenu', () => {
 	});
 
 	it('should check if links have correct paths', () => {
-		render(<BurgerMenu isOpen={true} />);
+		render(
+			<MockTheme>
+				<BurgerMenu isOpen={true} />
+			</MockTheme>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);
@@ -42,7 +55,11 @@ describe('BurgerMenu', () => {
 	});
 
 	it('should capitalize the first letter of each menu item', () => {
-		render(<BurgerMenu isOpen={true} />);
+		render(
+			<MockTheme>
+				<BurgerMenu isOpen={true} />
+			</MockTheme>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);

@@ -4,7 +4,7 @@ import Link from 'next/link';
 const UnorderedList = styled.ul.withConfig({
 	shouldForwardProp: (prop) => prop !== 'isOpen',
 })<{ isOpen: boolean }>`
-	position: absolute;
+	position: fixed;
 	display: flex;
 	flex-direction: column;
 	left: 0%;
