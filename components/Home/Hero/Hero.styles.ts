@@ -11,13 +11,18 @@ const HeroSection = styled.section`
 	gap: 1rem;
 	padding: 2rem 1rem;
 	color: white;
-	background-image: linear-gradient(to right, var(--primary-color), #407bff);
+	background-image: linear-gradient(
+		to right,
+		${(props) => props.theme.colors.background.primary.color},
+		#3f8feb
+	);
 `;
 
 const Button = styled(AntDButton)`
-	background-color: var(--secondary-color);
+	background-color: ${(props) => props.theme.colors.background.secondary.color};
 	color: white;
 	border: none;
+	font-weight: bold;
 	&:hover {
 		color: black;
 	}

@@ -12,7 +12,7 @@ const DescriptionSection = styled.section`
 	border-top: 1px solid #e6e6e6;
 	border-bottom: 1px solid #e6e6e6;
 	h1 {
-		color: var(--primary-color);
+		color: ${(props) => props.theme.colors.text.tertiary};
 	}
 `;
 
