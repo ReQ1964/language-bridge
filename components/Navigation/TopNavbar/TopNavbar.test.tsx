@@ -23,7 +23,7 @@ describe('TopNavbar', () => {
 		await userEvent.click(burgerIcon);
 
 		const navLinks = screen.getByRole('list');
-		expect(navLinks).toHaveStyle(`transform: translateY(30%)`);
+		expect(navLinks).toHaveStyle(`transform: translateY(0%)`);
 	});
 
 	it('should slide navigation links out of the screen when CloseIcon is clicked', async () => {

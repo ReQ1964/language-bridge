@@ -18,7 +18,7 @@ describe('BurgerMenu', () => {
 		});
 
 		const menu = screen.getByRole('list');
-		expect(menu).toHaveStyle(`transform: translateY(30%)`);
+		expect(menu).toHaveStyle(`transform: translateY(0%)`);
 	});
 
 	it('should render the menu with links and be out of view when isOpen is false', () => {
