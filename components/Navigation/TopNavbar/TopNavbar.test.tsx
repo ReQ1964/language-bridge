@@ -16,7 +16,8 @@ describe('TopNavbar', () => {
 	});
 
 	it('should render the navbar', () => {
-		screen.getByRole('navigation');
+		const navbar = screen.getByRole('navigation');
+		expect(navbar).toBeInTheDocument();
 	});
 
 	it('should slide navigation links into screen when BurgerIcon is clicked', async () => {

@@ -16,7 +16,8 @@ describe('BurgerMenu', () => {
 		);
 
 		linkTexts.forEach((text) => {
-			screen.getByText(text);
+			const link = screen.getByText(text);
+			expect(link).toBeInTheDocument();
 		});
 
 		const menu = screen.getByRole('list');
@@ -31,7 +32,8 @@ describe('BurgerMenu', () => {
 		);
 
 		linkTexts.forEach((text) => {
-			screen.getByText(text);
+			const link = screen.getByText(text);
+			expect(link).toBeInTheDocument();
 		});
 
 		const menu = screen.getByRole('list');

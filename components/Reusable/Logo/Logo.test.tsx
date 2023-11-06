@@ -21,5 +21,6 @@ describe('Logo', () => {
 
 	it('should render a h3 with correct text', () => {
 		const h3 = screen.getByText('Language Bridge');
+		expect(h3).toBeInTheDocument();
 	});
 });
