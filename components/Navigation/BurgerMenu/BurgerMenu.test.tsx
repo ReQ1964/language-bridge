@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import BurgerMenu from './BurgerMenu';
-import MockTheme from '@/helpers/MockTheme';
+import ThemesProvider from '@/theme/ThemesProvider';
 
 describe('BurgerMenu', () => {
 	const linkTexts = ['Home', 'Contact', 'About', 'Texts'];
 
 	it('should render the menu with links and be in view when isOpen is true', () => {
 		render(
-			<MockTheme>
+			<ThemesProvider>
 				<BurgerMenu isOpen={true} />
-			</MockTheme>
+			</ThemesProvider>
 		);
 
 		linkTexts.forEach((text) => {
@@ -23,9 +23,9 @@ describe('BurgerMenu', () => {
 
 	it('should render the menu with links and be out of view when isOpen is false', () => {
 		render(
-			<MockTheme>
+			<ThemesProvider>
 				<BurgerMenu isOpen={false} />
-			</MockTheme>
+			</ThemesProvider>
 		);
 
 		linkTexts.forEach((text) => {
@@ -39,9 +39,9 @@ describe('BurgerMenu', () => {
 
 	it('should check if links have correct paths', () => {
 		render(
-			<MockTheme>
+			<ThemesProvider>
 				<BurgerMenu isOpen={true} />
-			</MockTheme>
+			</ThemesProvider>
 		);
 
 		linkTexts.forEach((text) => {
@@ -56,9 +56,9 @@ describe('BurgerMenu', () => {
 
 	it('should capitalize the first letter of each menu item', () => {
 		render(
-			<MockTheme>
+			<ThemesProvider>
 				<BurgerMenu isOpen={true} />
-			</MockTheme>
+			</ThemesProvider>
 		);
 
 		linkTexts.forEach((text) => {

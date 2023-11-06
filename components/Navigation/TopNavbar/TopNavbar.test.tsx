@@ -1,14 +1,14 @@
 import TopNavbar from './TopNavbar';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import MockTheme from '@/helpers/MockTheme';
+import ThemesProvider from '@/theme/ThemesProvider';
 
 describe('TopNavbar', () => {
 	beforeEach(() => {
 		render(
-			<MockTheme>
+			<ThemesProvider>
 				<TopNavbar />
-			</MockTheme>
+			</ThemesProvider>
 		);
 	});
 

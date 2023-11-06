@@ -1,13 +1,13 @@
 import Logo from './Logo';
 import { render, screen } from '@testing-library/react';
-import MockTheme from '@/helpers/MockTheme';
+import ThemesProvider from '@/theme/ThemesProvider';
 
 describe('Logo', () => {
 	beforeEach(() => {
 		render(
-			<MockTheme>
+			<ThemesProvider>
 				<Logo />
-			</MockTheme>
+			</ThemesProvider>
 		);
 	});
 
