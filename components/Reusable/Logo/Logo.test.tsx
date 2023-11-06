@@ -1,12 +1,15 @@
-import Logo from './Logo';
 import { render, screen } from '@testing-library/react';
 import ThemesProvider from '@/theme/ThemesProvider';
+import { composeStories } from '@storybook/react';
+import * as stories from './Logo.stories';
+
+const { Default } = composeStories(stories);
 
 describe('Logo', () => {
 	beforeEach(() => {
 		render(
 			<ThemesProvider>
-				<Logo />
+				<Default />
 			</ThemesProvider>
 		);
 	});
@@ -18,6 +21,5 @@ describe('Logo', () => {
 
 	it('should render a h3 with correct text', () => {
 		const h3 = screen.getByText('Language Bridge');
-		expect(h3).toBeInTheDocument();
 	});
 });

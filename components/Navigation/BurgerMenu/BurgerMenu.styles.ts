@@ -8,13 +8,14 @@ const UnorderedList = styled.ul.withConfig({
 	display: flex;
 	flex-direction: column;
 	left: 0%;
+	top: -20%;
 	text-align: center;
 	list-style: none;
 	background-color: white;
 	width: 100%;
 	z-index: 1;
 	transition: 0.8s;
-	transform: translateY(${(props) => (props.isOpen ? '0%' : '-170%')});
+	transform: translateY(${(props) => (props.isOpen ? '130%' : '-40%')});
 `;
 
 const NextLink = styled(Link)`

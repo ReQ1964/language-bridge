@@ -9,6 +9,6 @@ const meta: Meta<typeof LanguagePicker> = {
 export default meta;
 type Story = StoryObj<typeof LanguagePicker>;
 
-export const Primary: Story = {
+export const Default: Story = {
 	render: () => <LanguagePicker />,
 };
