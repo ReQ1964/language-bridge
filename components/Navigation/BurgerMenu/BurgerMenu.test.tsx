@@ -1,11 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import BurgerMenu from './BurgerMenu';
+import ThemesProvider from '@/theme/ThemesProvider';
+import { composeStories } from '@storybook/react';
+import * as stories from './BurgerMenu.stories';
+
+const { Open, Close } = composeStories(stories);
 
 describe('BurgerMenu', () => {
 	const linkTexts = ['Home', 'Contact', 'About', 'Texts'];
 
 	it('should render the menu with links and be in view when isOpen is true', () => {
-		render(<BurgerMenu isOpen={true} />);
+		render(
+			<ThemesProvider>
+				<Open />
+			</ThemesProvider>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);
@@ -13,11 +21,15 @@ describe('BurgerMenu', () => {
 		});
 
 		const menu = screen.getByRole('list');
-		expect(menu).toHaveStyle(`transform: translateY(30%)`);
+		expect(menu).toHaveStyle(`transform: translateY(130%)`);
 	});
 
 	it('should render the menu with links and be out of view when isOpen is false', () => {
-		render(<BurgerMenu isOpen={false} />);
+		render(
+			<ThemesProvider>
+				<Close />
+			</ThemesProvider>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);
@@ -25,11 +37,15 @@ describe('BurgerMenu', () => {
 		});
 
 		const menu = screen.getByRole('list');
-		expect(menu).toHaveStyle(`transform: translateY(-170%)`);
+		expect(menu).toHaveStyle(`transform: translateY(-40%)`);
 	});
 
 	it('should check if links have correct paths', () => {
-		render(<BurgerMenu isOpen={true} />);
+		render(
+			<ThemesProvider>
+				<Open />
+			</ThemesProvider>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);
@@ -42,7 +58,11 @@ describe('BurgerMenu', () => {
 	});
 
 	it('should capitalize the first letter of each menu item', () => {
-		render(<BurgerMenu isOpen={true} />);
+		render(
+			<ThemesProvider>
+				<Open />
+			</ThemesProvider>
+		);
 
 		linkTexts.forEach((text) => {
 			const link = screen.getByText(text);

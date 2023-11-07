@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import BurgerIcon from '@/components/Navigation/BurgerIcon/BurgerIcon';
 import BurgerMenu from '@/components/Navigation/BurgerMenu/BurgerMenu';
 import Logo from '@/components/Reusable/Logo/Logo';
@@ -6,12 +6,8 @@ import LanguagePicker from '@/components/Navigation/LanguagePicker/LanguagePicke
 import menu_account from '@/public/icons/navigation/menu_account.svg';
 import S from './TopNavbar.styles';
 
-const TopNavbar = ({ storyIsOpen }: { storyIsOpen?: boolean }) => {
+const TopNavbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-
-	useEffect(() => {
-		setIsOpen(storyIsOpen || false);
-	}, [storyIsOpen]);
 
 	const toggleNavigationLinks = () => {
 		setIsOpen((prevState) => !prevState);
@@ -20,10 +16,7 @@ const TopNavbar = ({ storyIsOpen }: { storyIsOpen?: boolean }) => {
 	return (
 		<>
 			<S.Navbar>
-				<BurgerIcon
-					handleIconChange={toggleNavigationLinks}
-					isOpen={isOpen || storyIsOpen || false}
-				/>
+				<BurgerIcon handleIconChange={toggleNavigationLinks} isOpen={isOpen} />
 				<Logo />
 				<S.RightContainer>
 					<S.AccountIcon
@@ -35,7 +28,7 @@ const TopNavbar = ({ storyIsOpen }: { storyIsOpen?: boolean }) => {
 					<LanguagePicker />
 				</S.RightContainer>
 			</S.Navbar>
-			<BurgerMenu isOpen={isOpen || storyIsOpen || false} />
+			<BurgerMenu isOpen={isOpen} />
 		</>
 	);
 };
