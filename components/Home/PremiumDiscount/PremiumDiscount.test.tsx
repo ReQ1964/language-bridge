@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import ThemeProviders from '@/theme/ThemesProvider';
+import ThemesProvider from '@/theme/ThemesProvider';
 import { composeStories } from '@storybook/react';
 import * as stories from './PremiumDiscount.stories';
 
 const { Default } = composeStories(stories);
 
-describe('Logo', () => {
+describe('PremiumDiscount', () => {
 	it('should render the discount message', () => {
 		render(
-			<ThemeProviders>
+			<ThemesProvider>
 				<Default />
-			</ThemeProviders>
+			</ThemesProvider>
 		);
 
 		const paragraph = screen.getByText(

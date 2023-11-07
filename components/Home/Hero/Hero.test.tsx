@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import ThemeProviders from '@/theme/ThemesProvider';
+import ThemesProvider from '@/theme/ThemesProvider';
 import { composeStories } from '@storybook/react';
 import * as stories from './Hero.stories';
 import userEvent from '@testing-library/user-event';
@@ -9,12 +9,12 @@ const { Default } = composeStories(stories);
 
 vi.mock('next/router', () => require('next-router-mock'));
 
-describe('Logo', () => {
+describe('Hero', () => {
 	beforeEach(() => {
 		render(
-			<ThemeProviders>
+			<ThemesProvider>
 				<Default />
-			</ThemeProviders>
+			</ThemesProvider>
 		);
 	});
 
