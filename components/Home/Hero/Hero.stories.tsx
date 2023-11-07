@@ -9,6 +9,6 @@ const meta: Meta<typeof Hero> = {
 export default meta;
 type Story = StoryObj<typeof Hero>;
 
-export const Primary: Story = {
+export const Default: Story = {
 	render: () => <Hero />,
 };

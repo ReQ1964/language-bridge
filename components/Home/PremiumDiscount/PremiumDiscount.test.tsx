@@ -6,15 +6,13 @@ import * as stories from './PremiumDiscount.stories';
 const { Default } = composeStories(stories);
 
 describe('Logo', () => {
-	beforeEach(() => {
+	it('should render the discount message', () => {
 		render(
 			<ThemeProviders>
 				<Default />
 			</ThemeProviders>
 		);
-	});
 
-	it('should render the discount message', () => {
 		const paragraph = screen.getByText(
 			'Unlock new language superpowers with 50% off LanguageBridge Premium!'
 		);

@@ -14,6 +14,8 @@ const Hero = () => {
 			<S.Button onClick={goToLoginPage}>Login</S.Button>
 			<S.NextImage
 				src={hero_online_studying}
+				height={100}
+				width={100}
 				unoptimized
 				alt="Two people talking online"
 			/>
