@@ -4,7 +4,7 @@ import BurgerMenu from '@/components/Navigation/BurgerMenu/BurgerMenu'
 import Logo from '@/components/Reusable/Logo/Logo'
 import LanguagePicker from '@/components/Navigation/LanguagePicker/LanguagePicker'
 import menu_account from '@/public/icons/navigation/menu_account.svg'
-import S from './TopNavbar.styles'
+import { Navbar, RightContainer, AccountIcon } from './TopNavbar.styles'
 
 const TopNavbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,19 +15,19 @@ const TopNavbar = () => {
 
   return (
     <>
-      <S.Navbar>
+      <Navbar>
         <BurgerIcon handleIconChange={toggleNavigationLinks} isOpen={isOpen} />
         <Logo />
-        <S.RightContainer>
-          <S.AccountIcon
+        <RightContainer>
+          <AccountIcon
             src={menu_account}
             width={29}
             height={29}
-            alt='Icon to go to the account page'
+            alt="Icon to go to the account page"
           />
           <LanguagePicker />
-        </S.RightContainer>
-      </S.Navbar>
+        </RightContainer>
+      </Navbar>
       <BurgerMenu isOpen={isOpen} />
     </>
   )

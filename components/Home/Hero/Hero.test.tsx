@@ -19,13 +19,9 @@ describe('Hero', () => {
   })
 
   it('should render hero section with content', () => {
+    expect(screen.getByText('Studying Online is now much easier')).toBeInTheDocument()
     expect(
-      screen.getByText('Studying Online is now much easier')
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        "Learn everyday language in context. Let's connect and bridge the gap!"
-      )
+      screen.getByText("Learn everyday language in context. Let's connect and bridge the gap!")
     ).toBeInTheDocument()
     expect(screen.getByAltText('Two people talking online')).toBeInTheDocument()
   })

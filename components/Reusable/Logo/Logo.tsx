@@ -1,13 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
-import S from './Logo.styles'
+import { H3 } from './Logo.styles'
 
 const Logo = () => {
   return (
-    <Link href='/'>
-      <S.H3>Language Bridge</S.H3>
+    <Link href="/">
+      <H3>Language Bridge</H3>
     </Link>
   )
 }
 
+export default Logo
 export default Logo

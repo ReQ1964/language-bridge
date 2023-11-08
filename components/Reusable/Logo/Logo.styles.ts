@@ -5,4 +5,4 @@ const H3 = styled.h3`
   font-size: 1.3rem;
 `
 
-export default { H3 }
+export { H3 }

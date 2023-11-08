@@ -28,4 +28,4 @@ const AccountIcon = styled(Image)`
   cursor: pointer;
 `
 
-export default { Navbar, NextImage, RightContainer, AccountIcon }
+export { Navbar, NextImage, RightContainer, AccountIcon }

@@ -32,4 +32,4 @@ const ListItem = styled.li`
   padding: 0.7rem 0;
 `
 
-export default { UnorderedList, NextLink, ListItem }
+export { UnorderedList, NextLink, ListItem }
