@@ -1,35 +1,28 @@
-import menu_burger from '@/public/icons/navigation/menu_burger.svg';
-import menu_close from '@/public/icons/navigation/menu_close.svg';
-import S from './BurgerIcon.styles';
+import menu_burger from '@/public/icons/navigation/menu_burger.svg'
+import menu_close from '@/public/icons/navigation/menu_close.svg'
+import { NextImage } from './BurgerIcon.styles'
 
-const BurgerIcon = ({
-	handleIconChange,
-	isOpen,
-}: {
-	handleIconChange: Function;
-	isOpen: boolean;
-}) => {
-	const nextImage = (src: string, alt: string) => (
-		<S.NextImage
-			src={src}
-			width={28}
-			height={28}
-			alt={alt}
-			onClick={handleIconClick}
-		/>
-	);
+interface BurgerIconProps {
+  handleIconChange: () => void
+  isOpen: boolean
+}
 
-	const handleIconClick = () => {
-		handleIconChange();
-	};
+const BurgerIcon = ({ handleIconChange, isOpen }: BurgerIconProps) => {
+  const nextImage = (src: string, alt: string) => (
+    <NextImage src={src} width={28} height={28} alt={alt} onClick={handleIconClick} />
+  )
 
-	return (
-		<>
-			{isOpen
-				? nextImage(menu_close, 'Icon to close the navigation bar')
-				: nextImage(menu_burger, 'Icon to open the navigation bar')}
-		</>
-	);
-};
+  const handleIconClick = () => {
+    handleIconChange()
+  }
 
-export default BurgerIcon;
+  return (
+    <>
+      {isOpen
+        ? nextImage(menu_close, 'Icon to close the navigation bar')
+        : nextImage(menu_burger, 'Icon to open the navigation bar')}
+    </>
+  )
+}
+
+export default BurgerIcon

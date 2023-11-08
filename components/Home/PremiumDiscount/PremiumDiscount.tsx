@@ -1,11 +1,11 @@
-import S from './PremiumDiscount.styles';
+import { DiscountContainer } from './PremiumDiscount.styles'
 
 const PremiumDiscount = () => {
-	return (
-		<S.DiscountContainer>
-			<p>Unlock new language superpowers with 50% off LanguageBridge Premium!</p>
-		</S.DiscountContainer>
-	);
-};
+  return (
+    <DiscountContainer>
+      <p>Unlock new language superpowers with 50% off LanguageBridge Premium!</p>
+    </DiscountContainer>
+  )
+}
 
-export default PremiumDiscount;
+export default PremiumDiscount
