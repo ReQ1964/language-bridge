@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import Image from 'next/image';
+import styled from 'styled-components'
+import Image from 'next/image'
 
 const NextImage = styled(Image)`
-	cursor: pointer;
-`;
+  cursor: pointer;
+`
 
-export default { NextImage };
+export { NextImage }

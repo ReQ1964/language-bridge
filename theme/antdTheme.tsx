@@ -1,11 +1,11 @@
-import { ThemeConfig } from 'antd';
+import { ThemeConfig } from 'antd'
 
 const antdTheme: ThemeConfig = {
-	components: {
-		Button: {
-			colorPrimaryHover: '#765612',
-		},
-	},
-};
+  components: {
+    Button: {
+      colorPrimaryHover: '#765612',
+    },
+  },
+}
 
-export default antdTheme;
+export default antdTheme
