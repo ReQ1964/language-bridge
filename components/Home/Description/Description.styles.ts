@@ -16,4 +16,4 @@ const DescriptionSection = styled.section`
   }
 `
 
-export default { DescriptionSection }
+export { DescriptionSection }

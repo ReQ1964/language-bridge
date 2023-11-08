@@ -37,4 +37,3 @@ const LanguagePicker = () => (
 )
 
 export default LanguagePicker
-export default LanguagePicker

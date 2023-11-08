@@ -7,4 +7,4 @@ const DiscountContainer = styled.div`
   padding: 1rem 0.2rem;
 `
 
-export default { DiscountContainer }
+export { DiscountContainer }

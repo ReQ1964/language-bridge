@@ -17,4 +17,3 @@ const BurgerMenu = ({ isOpen }: { isOpen: boolean }) => {
 }
 
 export default BurgerMenu
-export default BurgerMenu
