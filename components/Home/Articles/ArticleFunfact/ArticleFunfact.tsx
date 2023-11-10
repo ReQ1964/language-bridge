@@ -1,4 +1,4 @@
-import { FunfactContainer } from './ArticleFunfacts.styles'
+import { FunfactContainer } from './ArticleFunfact.styles'
 
 const ArticleFunfact = ({ content }: { content: string }) => {
   return (
