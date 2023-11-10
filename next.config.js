@@ -6,6 +6,16 @@ const nextConfig = {
       ssr: true,
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.postimg.cc',
+        port: '',
+        pathname: '/**/**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig
