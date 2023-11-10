@@ -8,7 +8,7 @@ const DescriptionSection = styled.section`
   text-align: center;
   gap: 1rem;
   padding: 3rem 0.8rem;
-  margin: 2rem 0 2rem 0;
+  margin-top: 2rem;
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
   h1 {

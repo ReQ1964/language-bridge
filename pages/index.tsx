@@ -17,27 +17,41 @@ const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
 }
 
 export const getStaticProps = async () => {
-  const res = await axios.get(
-    'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
-  )
-
   const transformedArticles = []
 
-  for (const key in res.data) {
-    transformedArticles.push({
-      id: key,
-      title: res.data[key].title,
-      description: res.data[key].description,
-      image: res.data[key].image,
-      imageAlt: res.data[key].imageAlt,
-      funfact: res.data[key].funfact || null,
-    })
+  try {
+    const res = await axios.get(
+      'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
+    )
+    if (!res.data) {
+      return {
+        notFound: true,
+      }
+    }
+
+    for (const key in res.data) {
+      transformedArticles.push({
+        id: key,
+        title: res.data[key].title,
+        description: res.data[key].description,
+        image: res.data[key].image,
+        imageAlt: res.data[key].imageAlt,
+        funfact: res.data[key].funfact || null,
+      })
+    }
+  } catch (error) {
+    if (error) {
+      return {
+        notFound: true,
+      }
+    }
   }
 
   return {
     props: {
       articles: transformedArticles,
     },
+    revalidate: 1800,
   }
 }
 

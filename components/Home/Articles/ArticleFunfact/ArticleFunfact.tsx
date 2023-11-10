@@ -1,9 +1,11 @@
+import { FunfactContainer } from './ArticleFunfacts.styles'
+
 const ArticleFunfact = ({ content }: { content: string }) => {
   return (
-    <div>
+    <FunfactContainer>
       <h4>Did you know?</h4>
       <p>{content}</p>
-    </div>
+    </FunfactContainer>
   )
 }
 

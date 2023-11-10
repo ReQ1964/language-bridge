@@ -2,11 +2,12 @@ import React from 'react'
 
 import SingleArticle from '../SingleArticle/SingleArticle'
 import { ArticleProps } from '@/interfaces/ArticleProps'
+import { ArticlesUL, ArticlesSection } from './ArticlesList.styles'
 
 const ArticlesList = ({ articles }: { articles: Array<ArticleProps> }) => {
   return (
-    <section>
-      <ul>
+    <ArticlesSection>
+      <ArticlesUL>
         {articles.map((item: ArticleProps) => {
           return (
             <SingleArticle
@@ -19,8 +20,8 @@ const ArticlesList = ({ articles }: { articles: Array<ArticleProps> }) => {
             />
           )
         })}
-      </ul>
-    </section>
+      </ArticlesUL>
+    </ArticlesSection>
   )
 }
 
