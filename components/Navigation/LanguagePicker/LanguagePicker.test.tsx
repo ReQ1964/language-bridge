@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { composeStories } from '@storybook/react'
 import * as stories from './LanguagePicker.stories'
@@ -6,21 +6,18 @@ import * as stories from './LanguagePicker.stories'
 const { Default } = composeStories(stories)
 
 describe('LanguagePicker', () => {
-  beforeEach(() => {
+  beforeEach(() => {})
+
+  it('should show two language options on select click', async () => {
     render(<Default />)
-  })
 
-  it('should respond to hover actions; show/hide', async () => {
-    const button = screen.getByRole('button')
+    const select = screen.getByRole('combobox')
 
-    await userEvent.hover(button)
-    await waitFor(() => {
-      expect(button).toHaveClass('ant-dropdown-open')
-    })
+    await userEvent.click(select)
 
-    await userEvent.unhover(button)
-    await waitFor(() => {
-      expect(button).not.toHaveClass('ant-dropdown-open')
-    })
+    const spanish = screen.getByText('spanish')
+    const english = screen.getByText('english')
+    expect(spanish).toBeInTheDocument()
+    expect(english).toBeInTheDocument()
   })
 })

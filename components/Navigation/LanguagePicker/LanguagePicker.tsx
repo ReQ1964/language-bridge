@@ -1,39 +1,40 @@
-import type { MenuProps } from 'antd'
+import type { SelectProps } from 'antd'
 import Image from 'next/image'
-import { Dropdown } from 'antd'
+import { Select } from 'antd'
 import gb_icon from '@/public/icons/flags/gb.svg'
 import es_icon from '@/public/icons/flags/es.svg'
-import show_more_icon from '@/public/icons/navigation/menu_show_more.svg'
-import { DropdownContainer, DropdownButton } from './LanguagePicker.style'
+import { SelectElementContainer } from './LanguagePicker.style'
+import useStore from '@/store/store'
+import { StoreState } from '@/store/store'
 
-const items: MenuProps['items'] = [
+const options: SelectProps['options'] = [
   {
-    key: '1',
+    value: 'english',
     label: (
-      <DropdownContainer>
+      <SelectElementContainer>
         <Image src={gb_icon} width={22} height={22} alt="Flag of the United Kingdom" />
-        <p>ENG</p>
-      </DropdownContainer>
+      </SelectElementContainer>
     ),
   },
   {
-    key: '2',
+    value: 'spanish',
     label: (
-      <DropdownContainer>
+      <SelectElementContainer>
         <Image src={es_icon} width={22} height={22} alt="Flag of Spain" />
-        <p>SPA</p>
-      </DropdownContainer>
+      </SelectElementContainer>
     ),
   },
 ]
 
-const LanguagePicker = () => (
-  <Dropdown menu={{ items }} placement="bottom">
-    <DropdownButton>
-      <Image src={gb_icon} width={24} height={24} alt="Flag of the United Kingdom" />
-      <Image src={show_more_icon} width={24} height={24} alt="Click to show languages to choose" />
-    </DropdownButton>
-  </Dropdown>
-)
+const LanguagePicker = () => {
+  const changeCurrentLanguage = useStore((state) => state.changeCurrentLanguage)
+  const currentLanguage = useStore((state) => state.currentLanguage)
+
+  const onLanguageChange = (value: StoreState['currentLanguage']) => {
+    changeCurrentLanguage(value)
+  }
+
+  return <Select defaultValue={currentLanguage} options={options} onChange={onLanguageChange} />
+}
 
 export default LanguagePicker

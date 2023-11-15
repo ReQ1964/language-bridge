@@ -1,14 +1,14 @@
 import { create } from 'zustand'
 
-type State = {
+export type StoreState = {
   currentLanguage: 'english' | 'spanish'
 }
 
 type Action = {
-  changeCurrentLanguage: (language: State['currentLanguage']) => void
+  changeCurrentLanguage: (language: StoreState['currentLanguage']) => void
 }
 
-const useStore = create<State & Action>((set) => ({
+const useStore = create<StoreState & Action>((set) => ({
   currentLanguage: 'english',
   changeCurrentLanguage: (language) => set(() => ({ currentLanguage: language })),
 }))
