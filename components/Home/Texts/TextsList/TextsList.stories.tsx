@@ -32,5 +32,11 @@ export default meta
 type Story = StoryObj<typeof TextsList>
 
 export const Default: Story = {
-  render: () => <TextsList texts={sampleTexts} />,
+  render: () => <TextsList texts={sampleTexts} isLoading={false} error={false} />,
+}
+export const Loading: Story = {
+  render: () => <TextsList texts={sampleTexts} isLoading={true} error={false} />,
+}
+export const Error: Story = {
+  render: () => <TextsList texts={sampleTexts} isLoading={false} error={true} />,
 }

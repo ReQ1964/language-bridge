@@ -4,40 +4,60 @@ import Hero from '@/components/Home/Hero/Hero'
 import Description from '@/components/Home/Description/Description'
 import ArticlesList from '@/components/Home/Articles/ArticlesList/ArticlesList'
 import { ArticleProps } from '@/interfaces/ArticleProps'
-import { TextProps } from '@/interfaces/TextProps'
 import TextsList from '@/components/Home/Texts/TextsList/TextsList'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import useStore from '@/store/store'
 
-const HomePage = ({
-  articles,
-  texts,
-}: {
-  articles: Array<ArticleProps>
-  texts: Array<TextProps>
-}) => {
+const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
+  const currentLanguage = useStore((state) => state.currentLanguage)
+
+  const fetchTexts = async () => {
+    const textsResponse = await axios.get(
+      `https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/texts/${currentLanguage}.json`
+    )
+    const transformedTexts = Object.keys(textsResponse.data).map((key) => ({
+      title: textsResponse.data[key].title,
+      snippet: textsResponse.data[key].snippet,
+      image: textsResponse.data[key].image,
+      imageAlt: textsResponse.data[key].imageAlt,
+    }))
+
+    return transformedTexts
+  }
+
+  const {
+    isLoading,
+    error,
+    data = [],
+    refetch,
+  } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: fetchTexts,
+  })
+
+  useEffect(() => {
+    refetch()
+  }, [currentLanguage, refetch])
+
   return (
     <>
       <PremiumDiscount />
       <Hero />
       <Description />
       <ArticlesList articles={articles} />
-      <TextsList texts={texts} />
+      <TextsList texts={data} isLoading={isLoading} error={error} />
     </>
   )
 }
 
 export const getStaticProps = async () => {
   try {
-    // Use Promise.all to fetch data from multiple sources concurrently
-    const [articlesResponse, textsResponse] = await Promise.all([
-      axios.get(
-        'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
-      ),
-      axios.get(
-        'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/texts/english.json'
-      ),
-    ])
+    const articlesResponse = await axios.get(
+      'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
+    )
 
-    if (!articlesResponse.data || !textsResponse.data) {
+    if (!articlesResponse.data) {
       return {
         notFound: true,
       }
@@ -51,17 +71,9 @@ export const getStaticProps = async () => {
       funfact: articlesResponse.data[key].funfact || null,
     }))
 
-    const transformedTexts = Object.keys(textsResponse.data).map((key) => ({
-      title: textsResponse.data[key].title,
-      snippet: textsResponse.data[key].snippet,
-      image: textsResponse.data[key].image,
-      imageAlt: textsResponse.data[key].imageAlt,
-    }))
-
     return {
       props: {
         articles: transformedArticles,
-        texts: transformedTexts,
       },
       revalidate: 3600,
     }
