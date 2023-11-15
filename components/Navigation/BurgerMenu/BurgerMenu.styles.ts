@@ -15,7 +15,7 @@ const UnorderedList = styled.ul.withConfig({
   width: 100%;
   z-index: 1;
   transition: 0.8s;
-  transform: translateY(${(props) => (props.isOpen ? '130%' : '-40%')});
+  transform: translateY(${(props) => (props.isOpen ? '100%' : '-40%')});
 `
 
 const NextLink = styled(Link)`

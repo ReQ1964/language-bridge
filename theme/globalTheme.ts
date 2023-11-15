@@ -5,6 +5,7 @@ interface DefaultTheme {
       secondary: string
       tertiary: string
       quaternary: string
+      error: string
     }
     background: {
       primary: {
@@ -31,6 +32,7 @@ const globalTheme: DefaultTheme = {
       secondary: 'white',
       tertiary: '#2563eb',
       quaternary: '#f5c33b',
+      error: '#c30000',
     },
     background: {
       primary: {

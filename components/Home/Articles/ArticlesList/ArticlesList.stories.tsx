@@ -27,5 +27,7 @@ export default meta
 type Story = StoryObj<typeof ArticlesList>
 
 export const Default: Story = {
-  render: () => <ArticlesList articles={articles} />,
+  args: {
+    articles: articles,
+  },
 }
