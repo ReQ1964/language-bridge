@@ -5,6 +5,8 @@ import ThemesProvider from '@/theme/ThemesProvider'
 
 const { Default, WithoutFunFact } = composeStories(stories)
 
+
+
 describe('SingleArticle Component', () => {
   test('should render the article with all props', () => {
     render(
