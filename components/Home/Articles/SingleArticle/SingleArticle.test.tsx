@@ -1,34 +1,28 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import SingleArticle from './SingleArticle'
+import { composeStories } from '@storybook/react'
+import * as stories from './SingleArticle.stories'
 import ThemesProvider from '@/theme/ThemesProvider'
 
-const sampleArticle = {
-  image: '/path-to-image.jpg',
-  imageAlt: 'Image Alt Text',
-  title: 'Sample Article Title',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  funfact: 'Did you know? This is a fun fact!',
-}
+const { Default, WithoutFunFact } = composeStories(stories)
 
 describe('SingleArticle Component', () => {
   test('should render the article with all props', () => {
     render(
       <ThemesProvider>
-        <SingleArticle {...sampleArticle} />
+        <Default />
       </ThemesProvider>
     )
 
-    const titleElement = screen.getByText(sampleArticle.title)
+    const titleElement = screen.getByText(Default.args.title ?? '')
     expect(titleElement).toBeInTheDocument()
 
-    const descriptionElement = screen.getByText(sampleArticle.description)
+    const descriptionElement = screen.getByText(Default.args.description ?? '')
     expect(descriptionElement).toBeInTheDocument()
 
-    const imageElement = screen.getByAltText(sampleArticle.imageAlt)
+    const imageElement = screen.getByAltText(Default.args.imageAlt ?? '')
     expect(imageElement).toBeInTheDocument()
 
-    const funfactElement = screen.getByText(sampleArticle.funfact)
+    const funfactElement = screen.getByText(Default.args.funfact ?? '')
     expect(funfactElement).toBeInTheDocument()
   })
 })
@@ -36,10 +30,10 @@ describe('SingleArticle Component', () => {
 test('should render the article without funfact', () => {
   render(
     <ThemesProvider>
-      <SingleArticle {...sampleArticle} funfact={''} />
+      <WithoutFunFact />
     </ThemesProvider>
   )
 
-  const funfactElement = screen.queryByText(sampleArticle.funfact)
+  const funfactElement = screen.queryByText(Default.args.funfact ?? '')
   expect(funfactElement).toBeNull()
 })

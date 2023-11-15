@@ -19,9 +19,14 @@ export default meta
 type Story = StoryObj<typeof SingleArticle>
 
 export const Default: Story = {
-  render: () => <SingleArticle {...sampleArticle} />,
+  args: {
+    ...sampleArticle,
+  },
 }
 
 export const WithoutFunFact: Story = {
-  render: () => <SingleArticle {...sampleArticle} funfact={''} />,
+  args: {
+    ...sampleArticle,
+    funfact: '',
+  },
 }
