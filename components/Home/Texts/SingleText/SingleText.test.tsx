@@ -16,12 +16,7 @@ describe('SingleText', () => {
   beforeEach(() => {
     render(
       <ThemesProvider>
-        <Default
-          title={mockText.title}
-          snippet={mockText.snippet}
-          image={mockText.image}
-          imageAlt={mockText.imageAlt}
-        />
+        <Default />
       </ThemesProvider>
     )
   })

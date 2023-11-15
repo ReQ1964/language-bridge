@@ -4,7 +4,7 @@ import ThemesProvider from '@/theme/ThemesProvider'
 import { composeStories } from '@storybook/react'
 import * as stories from './TextsList.stories'
 
-const { Default } = composeStories(stories)
+const { Default, Loading, Error } = composeStories(stories)
 
 const sampleTexts = [
   {
@@ -31,7 +31,7 @@ describe('TextsList', () => {
   it('should render TextsList component with sample texts', () => {
     render(
       <ThemesProvider>
-        <Default texts={sampleTexts} />
+        <Default />
       </ThemesProvider>
     )
 
@@ -47,5 +47,25 @@ describe('TextsList', () => {
       expect(snippetElement).toBeInTheDocument()
       expect(imageElement).toBeInTheDocument()
     })
+  })
+
+  it('should render error message, when error is true', () => {
+    render(
+      <ThemesProvider>
+        <Error />
+      </ThemesProvider>
+    )
+    const errorText = screen.getByText('Failed to download the texts')
+    expect(errorText).toBeInTheDocument()
+  })
+
+  it('should render a loading icon, when error is true', () => {
+    render(
+      <ThemesProvider>
+        <Loading />
+      </ThemesProvider>
+    )
+    const loadingIcon = screen.getByTestId('loading-icon')
+    expect(loadingIcon).toBeInTheDocument()
   })
 })
