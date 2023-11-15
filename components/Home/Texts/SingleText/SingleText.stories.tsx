@@ -8,6 +8,7 @@ const sampleText = {
   imageAlt: 'Image Alt Text',
   title: 'Sample Story',
   snippet: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  level: 'a1',
 }
 
 const meta: Meta<typeof SingleText> = {
@@ -18,12 +19,11 @@ export default meta
 type Story = StoryObj<typeof SingleText>
 
 export const Default: Story = {
-  render: () => (
-    <SingleText
-      image={sampleText.image}
-      imageAlt={sampleText.imageAlt}
-      title={sampleText.title}
-      snippet={sampleText.snippet}
-    />
-  ),
+  args: {
+    image: sampleText.image,
+    imageAlt: sampleText.imageAlt,
+    title: sampleText.title,
+    snippet: sampleText.snippet,
+    level: sampleText.level,
+  },
 }

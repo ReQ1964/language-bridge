@@ -7,7 +7,7 @@ import c1 from '@/public/icons/language_level/c1.png'
 import c2 from '@/public/icons/language_level/c2.png'
 
 type LanguageLevelIconProps = {
-  level: 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2'
+  level: string
   height: number
   width: number
 }

@@ -29,6 +29,7 @@ const TextsList = ({
               snippet={item.snippet}
               image={item.image}
               imageAlt={item.imageAlt}
+              level={item.level}
             />
           ))}
         </TextsUl>

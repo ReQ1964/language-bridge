@@ -21,6 +21,7 @@ const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
       snippet: textsResponse.data[key].snippet,
       image: textsResponse.data[key].image,
       imageAlt: textsResponse.data[key].imageAlt,
+      level: textsResponse.data[key].level,
     }))
 
     return transformedTexts

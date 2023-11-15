@@ -4,7 +4,7 @@ import { RightOutlined } from '@ant-design/icons'
 import { ConfigProvider } from 'antd'
 import LanguageLevelIcon from '@/components/Reusable/LanguageLevelIcon/LanguageLevelIcon'
 
-const SingleText = ({ title, snippet, image, imageAlt }: TextProps) => {
+const SingleText = ({ title, snippet, image, imageAlt, level }: TextProps) => {
   return (
     <ConfigProvider
       theme={{
@@ -23,7 +23,7 @@ const SingleText = ({ title, snippet, image, imageAlt }: TextProps) => {
         </UpperContainer>
         <LowerContainer>
           <AntButton icon={<RightOutlined />}>Start reading</AntButton>
-          <LanguageLevelIcon level="a1" width={48} height={48} />
+          <LanguageLevelIcon level={level} width={48} height={48} />
         </LowerContainer>
       </TextItem>
     </ConfigProvider>

@@ -9,18 +9,21 @@ const sampleTexts = [
     imageAlt: 'Image Alt Text 1',
     title: 'Sample Story 1',
     snippet: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit 1.',
+    level: 'a1',
   },
   {
     image: hero_online_studying,
     imageAlt: 'Image Alt Text 2',
     title: 'Sample Story 2',
     snippet: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit 2.',
+    level: 'b2',
   },
   {
     image: hero_online_studying,
     imageAlt: 'Image Alt Text 3',
     title: 'Sample Story 3',
     snippet: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit 3.',
+    level: 'c3',
   },
 ]
 
@@ -32,11 +35,23 @@ export default meta
 type Story = StoryObj<typeof TextsList>
 
 export const Default: Story = {
-  render: () => <TextsList texts={sampleTexts} isLoading={false} error={false} />,
+  args: {
+    texts: sampleTexts,
+    isLoading: false,
+    error: false,
+  },
 }
 export const Loading: Story = {
-  render: () => <TextsList texts={sampleTexts} isLoading={true} error={false} />,
+  args: {
+    texts: sampleTexts,
+    isLoading: true,
+    error: false,
+  },
 }
 export const Error: Story = {
-  render: () => <TextsList texts={sampleTexts} isLoading={false} error={true} />,
+  args: {
+    texts: sampleTexts,
+    isLoading: false,
+    error: true,
+  },
 }

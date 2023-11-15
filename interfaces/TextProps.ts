@@ -5,4 +5,5 @@ export type TextProps = {
   imageAlt: string
   title: string
   snippet: string
+  level: string
 }

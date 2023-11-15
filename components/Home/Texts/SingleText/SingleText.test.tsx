@@ -5,13 +5,6 @@ import * as stories from './SingleText.stories'
 
 const { Default } = composeStories(stories)
 
-const mockText = {
-  image: 'example-image.png',
-  imageAlt: 'Image Alt Text',
-  title: 'Sample Story',
-  snippet: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-}
-
 describe('SingleText', () => {
   beforeEach(() => {
     render(
@@ -22,9 +15,9 @@ describe('SingleText', () => {
   })
 
   it('should render with provided props', () => {
-    expect(screen.getByText(mockText.title)).toBeInTheDocument()
-    expect(screen.getByText(mockText.snippet)).toBeInTheDocument()
-    expect(screen.getByAltText(mockText.imageAlt)).toBeInTheDocument()
+    expect(screen.getByText(Default.args.title ?? '')).toBeInTheDocument()
+    expect(screen.getByText(Default.args.snippet ?? '')).toBeInTheDocument()
+    expect(screen.getByAltText(Default.args.imageAlt ?? '')).toBeInTheDocument()
   })
 
   it('should render "Start reading" button and LanguageLevelIcon', () => {
