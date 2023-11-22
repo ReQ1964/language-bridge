@@ -3,7 +3,7 @@ import { ThemeConfig } from 'antd'
 const antdTheme: ThemeConfig = {
   components: {
     Button: {
-      colorPrimaryHover: '#765612',
+      colorPrimaryHover: '#BED0F9',
     },
   },
 }
