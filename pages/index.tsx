@@ -1,13 +1,14 @@
+import { useEffect } from 'react'
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import { ArticleProps } from '@/interfaces/ArticleProps'
+import useStore from '@/store/store'
 import PremiumDiscount from '@/components/Home/PremiumDiscount/PremiumDiscount'
 import Hero from '@/components/Home/Hero/Hero'
 import Description from '@/components/Home/Description/Description'
 import ArticlesList from '@/components/Home/Articles/ArticlesList/ArticlesList'
-import { ArticleProps } from '@/interfaces/ArticleProps'
 import TextsList from '@/components/Home/Texts/TextsList/TextsList'
-import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
-import useStore from '@/store/store'
+import LanguageLevelAssessment from '@/components/Home/LanguageLevelAssessment/LanguageLevelAssessment'
 
 const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
   const currentLanguage = useStore((state) => state.currentLanguage)
@@ -48,6 +49,7 @@ const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
       <Description />
       <ArticlesList articles={articles} />
       <TextsList texts={data} isLoading={isLoading} error={error} />
+      <LanguageLevelAssessment language="spanish" />
     </>
   )
 }
