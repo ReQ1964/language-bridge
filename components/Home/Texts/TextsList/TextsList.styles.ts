@@ -5,12 +5,12 @@ const TextsSection = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
 `
 
 const TextsHeading = styled.h3`
   color: ${(props) => props.theme.colors.text.tertiary};
   margin: 3rem 0 1rem 1rem;
+  align-self: flex-start;
 `
 
 const TextsUl = styled.ul`

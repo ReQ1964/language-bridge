@@ -2,11 +2,12 @@ import styled from 'styled-components'
 import { Button } from 'antd'
 
 const AssessmentContainer = styled.article`
-  position: relative;
+  display: flex;
   margin-top: 2rem;
   max-width: 450px;
   margin: 2rem auto 5rem;
   border-radius: 1.2rem;
+  padding: 0 1rem;
 `
 
 const AntDButton = styled(Button)`
@@ -14,9 +15,9 @@ const AntDButton = styled(Button)`
   color: ${(props) => props.theme.colors.text.secondary};
 `
 const LeftContainer = styled.div`
-  width: 65%;
+  width: 60%;
   background-color: ${(props) => props.theme.colors.background.primary.tint1};
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-radius: 1.25rem 0 0 1.25rem;
   h4 {
     position: relative;
@@ -30,22 +31,19 @@ const LeftContainer = styled.div`
 `
 
 const RightContainer = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  padding: 1.5rem;
+  width: 40%;
+  padding: 1.2rem;
   border-radius: 0 1.25rem 1.25rem 0;
   background-color: ${(props) => props.theme.colors.background.primary.color};
 `
 
 const ButtonContainer = styled.div`
   position: absolute;
-  right: calc((115% - 150px) / 2);
+  right: calc((120% - 150px) / 2);
   padding: 0.5rem;
   background-color: ${(props) => props.theme.colors.background.primary.tint1};
   border-radius: 1rem;
