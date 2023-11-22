@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 
+const TextsSection = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+`
+
 const TextsHeading = styled.h3`
   color: ${(props) => props.theme.colors.text.tertiary};
   margin: 3rem 0 1rem 1rem;
@@ -11,4 +19,4 @@ const TextsUl = styled.ul`
   gap: 2rem;
 `
 
-export { TextsUl, TextsHeading }
+export { TextsUl, TextsHeading, TextsSection }
