@@ -41,13 +41,14 @@ const RightContainer = styled.div`
   padding: 1.5rem;
   border-radius: 0 1.25rem 1.25rem 0;
   background-color: ${(props) => props.theme.colors.background.primary.color};
-  div {
-    position: absolute;
-    right: calc((115% - 150px) / 2);
-    padding: 0.5rem;
-    background-color: ${(props) => props.theme.colors.background.primary.tint1};
-    border-radius: 1rem;
-  }
 `
 
-export { AssessmentContainer, AntDButton, LeftContainer, RightContainer }
+const ButtonContainer = styled.div`
+  position: absolute;
+  right: calc((115% - 150px) / 2);
+  padding: 0.5rem;
+  background-color: ${(props) => props.theme.colors.background.primary.tint1};
+  border-radius: 1rem;
+`
+
+export { AssessmentContainer, AntDButton, LeftContainer, RightContainer, ButtonContainer }
