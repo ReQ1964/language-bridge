@@ -5,7 +5,7 @@ const AssessmentContainer = styled.article`
   display: flex;
   margin-top: 2rem;
   max-width: 450px;
-  margin: 2rem auto 5rem;
+  margin: 2rem auto;
   border-radius: 1.2rem;
   padding: 0 1rem;
 `
