@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { ArticleProps } from '@/interfaces/ArticleProps'
+import { ReviewProps } from '@/interfaces/ReviewProps'
+import { TextProps } from '@/interfaces/TextProps'
 import useStore from '@/store/store'
 import PremiumDiscount from '@/components/Home/PremiumDiscount/PremiumDiscount'
 import Hero from '@/components/Home/Hero/Hero'
@@ -9,31 +11,28 @@ import Description from '@/components/Home/Description/Description'
 import ArticlesList from '@/components/Home/Articles/ArticlesList/ArticlesList'
 import TextsList from '@/components/Home/Texts/TextsList/TextsList'
 import LanguageLevelAssessment from '@/components/Home/LanguageLevelAssessment/LanguageLevelAssessment'
+import ReviewsList from '@/components/Home/Reviews/ReviewsList/ReviewsList'
+import transformFirebaseData from '@/utils/transformFirebaseData'
 
-const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
+const HomePage = ({
+  articles,
+  reviews,
+}: {
+  articles: Array<ArticleProps>
+  reviews: Array<ReviewProps>
+}) => {
   const currentLanguage = useStore((state) => state.currentLanguage)
 
   const fetchTexts = async () => {
     const textsResponse = await axios.get(
       `https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/texts/${currentLanguage}.json`
     )
-    const transformedTexts = Object.keys(textsResponse.data).map((key) => ({
-      title: textsResponse.data[key].title,
-      snippet: textsResponse.data[key].snippet,
-      image: textsResponse.data[key].image,
-      imageAlt: textsResponse.data[key].imageAlt,
-      level: textsResponse.data[key].level,
-    }))
+    const transformedTexts = transformFirebaseData(textsResponse.data) as Array<TextProps>
 
     return transformedTexts
   }
 
-  const {
-    isLoading,
-    error,
-    data = [],
-    refetch,
-  } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['repoData'],
     queryFn: fetchTexts,
   })
@@ -48,35 +47,37 @@ const HomePage = ({ articles }: { articles: Array<ArticleProps> }) => {
       <Hero />
       <Description />
       <ArticlesList articles={articles} />
-      <TextsList texts={data} isLoading={isLoading} error={error} />
+      <TextsList texts={data || []} isLoading={isLoading} error={error} />
       <LanguageLevelAssessment language="spanish" />
+      <ReviewsList reviews={reviews} />
     </>
   )
 }
 
 export const getStaticProps = async () => {
   try {
-    const articlesResponse = await axios.get(
-      'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
-    )
+    const [articlesResponse, reviewsResponse] = await Promise.all([
+      axios.get(
+        'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
+      ),
+      axios.get(
+        'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/reviews.json'
+      ),
+    ])
 
-    if (!articlesResponse.data) {
+    if (!articlesResponse.data || !reviewsResponse.data) {
       return {
         notFound: true,
       }
     }
 
-    const transformedArticles = Object.keys(articlesResponse.data).map((key) => ({
-      title: articlesResponse.data[key].title,
-      description: articlesResponse.data[key].description,
-      image: articlesResponse.data[key].image,
-      imageAlt: articlesResponse.data[key].imageAlt,
-      funfact: articlesResponse.data[key].funfact || null,
-    }))
+    const transformedReviews = transformFirebaseData(reviewsResponse.data)
+    const transformedArticles = transformFirebaseData(articlesResponse.data)
 
     return {
       props: {
         articles: transformedArticles,
+        reviews: transformedReviews,
       },
       revalidate: 3600,
     }
