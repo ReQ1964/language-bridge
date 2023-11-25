@@ -13,6 +13,7 @@ import TextsList from '@/components/Home/Texts/TextsList/TextsList'
 import LanguageLevelAssessment from '@/components/Home/LanguageLevelAssessment/LanguageLevelAssessment'
 import ReviewsList from '@/components/Home/Reviews/ReviewsList/ReviewsList'
 import transformFirebaseData from '@/utils/transformFirebaseData'
+import PricingOptions from '@/components/Home/Pricing/PricingOptions/PricingOptions'
 
 const HomePage = ({
   articles,
@@ -48,8 +49,9 @@ const HomePage = ({
       <Description />
       <ArticlesList articles={articles} />
       <TextsList texts={data || []} isLoading={isLoading} error={error} />
-      <LanguageLevelAssessment language="spanish" />
       <ReviewsList reviews={reviews} />
+      <LanguageLevelAssessment language="spanish" />
+      <PricingOptions />
     </>
   )
 }

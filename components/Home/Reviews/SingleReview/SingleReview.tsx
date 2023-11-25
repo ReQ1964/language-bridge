@@ -1,5 +1,5 @@
 import { Rate } from 'antd'
-import { ReviewArtlice } from './SingleReview.styles'
+import { ReviewArticle } from './SingleReview.styles'
 
 const SingleReview = ({
   rating,
@@ -11,11 +11,11 @@ const SingleReview = ({
   author: string
 }) => {
   return (
-    <ReviewArtlice>
+    <ReviewArticle>
       <Rate disabled defaultValue={rating} />
       <p>{content}</p>
       <h4>{author}</h4>
-    </ReviewArtlice>
+    </ReviewArticle>
   )
 }
 
