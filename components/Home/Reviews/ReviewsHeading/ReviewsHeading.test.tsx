@@ -14,9 +14,9 @@ describe('ReviewsHeading', () => {
     )
 
     const h3 = screen.getByText(/what others love about Language Bridge/i)
-    const h4 = screen.getByText(/Our strong community are all learning together./i)
+    const p = screen.getByText(/Our strong community are all learning together./i)
 
     expect(h3).toBeInTheDocument()
-    expect(h4).toBeInTheDocument()
+    expect(p).toBeInTheDocument()
   })
 })

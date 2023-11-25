@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const ReviewsHeader = styled.header`
   padding: 1.5rem;
-  h4 {
+  p {
     margin-top: 1rem;
   }
 `
