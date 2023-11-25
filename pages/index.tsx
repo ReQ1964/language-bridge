@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { ArticleProps } from '@/interfaces/ArticleProps'
 import { ReviewProps } from '@/interfaces/ReviewProps'
 import { TextProps } from '@/interfaces/TextProps'
+import { PricingProps } from '@/interfaces/PricingProps'
 import useStore from '@/store/store'
 import PremiumDiscount from '@/components/Home/PremiumDiscount/PremiumDiscount'
 import Hero from '@/components/Home/Hero/Hero'
@@ -15,13 +16,13 @@ import ReviewsList from '@/components/Home/Reviews/ReviewsList/ReviewsList'
 import transformFirebaseData from '@/utils/transformFirebaseData'
 import PricingOptions from '@/components/Home/Pricing/PricingOptions/PricingOptions'
 
-const HomePage = ({
-  articles,
-  reviews,
-}: {
+type HomePageProps = {
   articles: Array<ArticleProps>
   reviews: Array<ReviewProps>
-}) => {
+  pricingOptions: Array<PricingProps>
+}
+
+const HomePage = ({ articles, reviews, pricingOptions }: HomePageProps) => {
   const currentLanguage = useStore((state) => state.currentLanguage)
 
   const fetchTexts = async () => {
@@ -51,23 +52,26 @@ const HomePage = ({
       <TextsList texts={data || []} isLoading={isLoading} error={error} />
       <ReviewsList reviews={reviews} />
       <LanguageLevelAssessment language="spanish" />
-      <PricingOptions />
+      <PricingOptions pricingOptions={pricingOptions} />
     </>
   )
 }
 
 export const getStaticProps = async () => {
   try {
-    const [articlesResponse, reviewsResponse] = await Promise.all([
+    const [articlesResponse, reviewsResponse, pricingOptionsResponse] = await Promise.all([
       axios.get(
         'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/articles.json'
       ),
       axios.get(
         'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/reviews.json'
       ),
+      axios.get(
+        'https://language-bridge-17ec0-default-rtdb.europe-west1.firebasedatabase.app/pricingOptions.json'
+      ),
     ])
 
-    if (!articlesResponse.data || !reviewsResponse.data) {
+    if (!articlesResponse.data || !reviewsResponse.data || !pricingOptionsResponse.data) {
       return {
         notFound: true,
       }
@@ -75,11 +79,13 @@ export const getStaticProps = async () => {
 
     const transformedReviews = transformFirebaseData(reviewsResponse.data)
     const transformedArticles = transformFirebaseData(articlesResponse.data)
+    const transformedPricingOptions = transformFirebaseData(pricingOptionsResponse.data)
 
     return {
       props: {
         articles: transformedArticles,
         reviews: transformedReviews,
+        pricingOptions: transformedPricingOptions,
       },
       revalidate: 3600,
     }

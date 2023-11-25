@@ -2,23 +2,29 @@ import PricingHeading from '../PricingHeading/PricingHeading'
 import { PricingSection } from './PricingOptions.styles'
 import SinglePricingOption from '../SinglePricingOption/SinglePricingOption'
 import { SwiperSlide } from 'swiper/react'
+import { PricingProps } from '@/interfaces/PricingProps'
+import capitalizeWord from '@/utils/capitalizeWord'
 
-const mock = ['good', 'amazing', 'great', 'wow']
-
-const PricingOptions = () => {
+const PricingOptions = ({ pricingOptions }: { pricingOptions: Array<PricingProps> }) => {
   return (
     <>
       <PricingHeading />
-      <PricingSection spaceBetween={11} slidesPerView={2}>
-        <SwiperSlide>
-          <SinglePricingOption type="Basic" price="Free" features={mock} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SinglePricingOption type="Basic" price="Free" features={mock} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SinglePricingOption type="Basic" price="Free" features={mock} featured={true} />
-        </SwiperSlide>
+      <PricingSection spaceBetween={11} slidesPerView={1}>
+        {pricingOptions.map((option) => {
+          const featuresArray: string[] = Object.values(option.features)
+          console.log(featuresArray)
+
+          return (
+            <SwiperSlide key={option.type}>
+              <SinglePricingOption
+                type={capitalizeWord(option.type)}
+                price={option.price === 0 ? 'Free' : `$${option.price} / month`}
+                features={featuresArray}
+                featured={option.featured}
+              />
+            </SwiperSlide>
+          )
+        })}
       </PricingSection>
     </>
   )

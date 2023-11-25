@@ -6,17 +6,11 @@ import {
   AntDButton,
   Price,
 } from './SinglePricingOption.styles'
-
-type PricingProps = {
-  type: string
-  price: string | number
-  features: string[]
-  featured?: boolean
-}
+import { PricingProps } from '@/interfaces/PricingProps'
 
 const SinglePricingOption = ({ type, price, features, featured }: PricingProps) => {
   return (
-    <PricingOption>
+    <PricingOption $featured={featured}>
       <h2>{type}</h2>
       <Price $featured={featured}>{price}</Price>
       <FeatureList>

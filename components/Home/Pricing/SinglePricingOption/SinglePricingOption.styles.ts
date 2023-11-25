@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 import { Button } from 'antd'
 
-const PricingOption = styled.div`
+const PricingOption = styled.div<{ $featured?: boolean }>`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 1.2rem;
-  border: 1px solid black;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: ${(props) => (props.$featured ? '1.5px solid black' : '1px solid gray')};
   border-radius: 0.8rem;
   min-height: 320px;
   max-height: 400px;
+  box-shadow: ${(props) => (props.$featured ? '8px 8px 23px -16px rgba(66, 68, 90, 1)' : null)};
 `
 
 const Price = styled.h3<{ $featured?: boolean }>`
