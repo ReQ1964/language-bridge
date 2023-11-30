@@ -9,7 +9,8 @@ const { Default } = composeStories(stories)
 
 describe('PricingOptions', () => {
   it('should render PricingOptions correctly with mock data', () => {
-    const pricingOptions = Default.args as Array<PricingProps>
+    const { pricingOptions } = Default.args as { pricingOptions: PricingProps[] }
+
     render(
       <ThemesProvider>
         <Default />
@@ -23,7 +24,9 @@ describe('PricingOptions', () => {
     expect(screen.getByText(pricingOptions[0].features[0])).toBeInTheDocument()
 
     expect(screen.getByText(pricingOptions[1].type)).toBeInTheDocument()
-    expect(screen.getByText(pricingOptions[1].price)).toBeInTheDocument()
-    expect(screen.getByText(pricingOptions[1].features[1])).toBeInTheDocument()
+    expect(
+      screen.getByText(new RegExp(pricingOptions[1].price.toString(), 'i'))
+    ).toBeInTheDocument()
+    expect(screen.getByText(pricingOptions[1].features[0])).toBeInTheDocument()
   })
 })

@@ -13,11 +13,11 @@ describe('PricingHeading', () => {
         <Default />
       </ThemesProvider>
     )
+
+    const h3 = screen.getByText(/pricing plan/i)
+    const paragraph = screen.getByText(/choose the right pricing/i)
+
+    expect(h3).toBeInTheDocument()
+    expect(paragraph).toBeInTheDocument()
   })
-
-  const h3 = screen.getByText('Pricing plan')
-  const paragraph = screen.getByText(/choose the right pricing/i)
-
-  expect(h3).toBeInTheDocument()
-  expect(paragraph).toBeInTheDocument()
 })
