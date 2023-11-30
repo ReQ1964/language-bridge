@@ -12,7 +12,6 @@ const PricingOptions = ({ pricingOptions }: { pricingOptions: Array<PricingProps
       <PricingSection spaceBetween={11} slidesPerView={1}>
         {pricingOptions.map((option) => {
           const featuresArray: string[] = Object.values(option.features)
-          console.log(featuresArray)
 
           return (
             <SwiperSlide key={option.type}>
