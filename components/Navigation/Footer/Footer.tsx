@@ -35,16 +35,17 @@ const Footer = () => {
         </a>
       </ContactContainer>
       <SocialsContainer>
-        <a href="https://facebook.com">
+        <a href="https://facebook.com" data-testid="facebook-icon">
           <FacebookFilled />
         </a>
-        <a href="https://linkedin.com">
+        <a href="https://linkedin.com" data-testid="linkedin-icon">
           <LinkedinFilled />
         </a>
-        <a href="https://twitter.com">
+        <a href="https://twitter.com" data-testid="twitter-icon">
           <TwitterSquareFilled />
         </a>
       </SocialsContainer>
+
       <BottomContainer>
         <p>2023 Language Bridge. All Rights Reserved</p>
         <TermsAndConditionsContainer>
