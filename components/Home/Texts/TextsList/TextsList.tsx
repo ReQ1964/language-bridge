@@ -1,8 +1,9 @@
 import { TextProps } from '@/interfaces/TextProps'
 import SingleText from '../SingleText/SingleText'
-import { TextsUl, TextsHeading } from './TextsList.styles'
+import { TextsUl, TextsHeading, TextsSection } from './TextsList.styles'
 import LoadingIcon from '@/components/Reusable/LoadingIcon/LoadingIcon'
 import ErrorText from '@/components/Reusable/ErrorText/ErrorText'
+import SeeMoreButton from '../SeeMoreButton/SeeMoreButton'
 
 const TextsList = ({
   texts,
@@ -14,27 +15,30 @@ const TextsList = ({
   error: unknown
 }) => {
   return (
-    <section>
+    <TextsSection>
       <TextsHeading>Popular texts</TextsHeading>
       {isLoading ? (
         <LoadingIcon />
       ) : error ? (
         <ErrorText>Failed to download the texts</ErrorText>
       ) : (
-        <TextsUl>
-          {texts.map((item: TextProps) => (
-            <SingleText
-              key={item.title}
-              title={item.title}
-              snippet={item.snippet}
-              image={item.image}
-              imageAlt={item.imageAlt}
-              level={item.level}
-            />
-          ))}
-        </TextsUl>
+        <>
+          <TextsUl>
+            {texts.map((item: TextProps) => (
+              <SingleText
+                key={item.title}
+                title={item.title}
+                snippet={item.snippet}
+                image={item.image}
+                imageAlt={item.imageAlt}
+                level={item.level}
+              />
+            ))}
+          </TextsUl>
+          <SeeMoreButton />
+        </>
       )}
-    </section>
+    </TextsSection>
   )
 }
 
