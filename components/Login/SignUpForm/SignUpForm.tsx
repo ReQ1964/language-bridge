@@ -4,13 +4,18 @@ import YupPassword from 'yup-password'
 YupPassword(yup)
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Input, Typography } from 'antd'
-import { SForm, Btn, HighlightedSpan, NextImage, ErrorMessage } from './SignUpForm.styles'
+import { SForm, Btn, HighlightedSpan, NextImage, ErrorMessage } from '../AuthForms.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
+import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
 
 type SignUpFormInputsData = {
   username: string
   email: string
   password: string
+}
+
+type SignUpFormProps = {
+  setAuthMethod: (method: 'login' | 'signup') => void
 }
 
 const schema = yup.object().shape({
@@ -19,7 +24,7 @@ const schema = yup.object().shape({
   password: yup.string().password().required('password is a required field'),
 })
 
-const SignUpForm = () => {
+const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
   const {
     control,
     handleSubmit,
@@ -28,6 +33,10 @@ const SignUpForm = () => {
 
   const onSubmit = (data: SignUpFormInputsData) => {
     console.log(data)
+  }
+
+  const setAuthMethodToLogin = () => {
+    setAuthMethod('login')
   }
 
   return (
@@ -95,12 +104,15 @@ const SignUpForm = () => {
             )}
           ></Controller>
         </div>
-        <h4>
-          Already have an account? <HighlightedSpan>Log In</HighlightedSpan>
-        </h4>
+
         <Btn size="large" htmlType="submit">
           Sign Up
         </Btn>
+        <OutsideProvidersAuth />
+        <p>
+          Already have an account?{' '}
+          <HighlightedSpan onClick={setAuthMethodToLogin}>Log In</HighlightedSpan>
+        </p>
       </SForm>
     </>
   )
