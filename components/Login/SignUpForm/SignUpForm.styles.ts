@@ -26,6 +26,7 @@ const Btn = styled(Button)`
 const HighlightedSpan = styled.span`
   color: ${(props) => props.theme.colors.text.tertiary};
 `
+
 const NextImage = styled(Image)`
   display: block;
   width: 100%;
@@ -35,4 +36,8 @@ const NextImage = styled(Image)`
   margin: 0 auto 2rem;
 `
 
-export { SForm, Btn, HighlightedSpan, NextImage }
+const ErrorMessage = styled.p`
+  color: ${(props) => props.theme.colors.text.error};
+`
+
+export { SForm, Btn, HighlightedSpan, NextImage, ErrorMessage }
