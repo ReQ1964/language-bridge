@@ -5,15 +5,19 @@ import { useLayoutEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import LoadingIcon from '@/components/Reusable/LoadingIcon/LoadingIcon'
 
-const withAuth = (Component: NextComponentType) => {
+const withRouteProtection = (
+  Component: NextComponentType,
+  redirectRoute: string,
+  requireAuth: boolean
+) => {
   const Auth: NextPage = (props) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(true)
 
     useLayoutEffect(() => {
       onAuthStateChanged(auth, (user) => {
-        if (user) {
-          router.replace('/account')
+        if (requireAuth ? user : !user) {
+          router.replace(redirectRoute)
         } else {
           setIsLoading(false)
         }
@@ -33,4 +37,4 @@ const withAuth = (Component: NextComponentType) => {
   return Auth
 }
 
-export default withAuth
+export default withRouteProtection
