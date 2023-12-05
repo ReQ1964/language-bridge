@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-const DualRingSpinner = styled.div`
+const DualRingSpinner = styled.div<{ $fullscreen?: boolean }>`
+  position: ${(props) => (props.$fullscreen ? 'absolute' : '')};
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: block;
   width: 80px;
   height: 80px;
@@ -27,4 +31,9 @@ const DualRingSpinner = styled.div`
   }
 `
 
-export { DualRingSpinner }
+const FullscreenContainer = styled.div`
+  position: relative;
+  height: 50vh;
+`
+
+export { DualRingSpinner, FullscreenContainer }
