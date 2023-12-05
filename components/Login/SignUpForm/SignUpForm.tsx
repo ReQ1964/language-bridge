@@ -14,6 +14,7 @@ import {
 } from '../AuthForms.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 type SignUpFormInputsData = {
   username: string
@@ -26,9 +27,12 @@ type SignUpFormProps = {
 }
 
 const schema = yup.object().shape({
-  username: yup.string().required('username is a required field'),
-  email: yup.string().email().required('email is a required field'),
-  password: yup.string().password().required('password is a required field'),
+  username: yup
+    .string()
+    .min(3, 'username must be at least 3 characters')
+    .required('username is required'),
+  email: yup.string().email('email must be valid').required('email is required'),
+  password: yup.string().password().required('password is required'),
 })
 
 const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
@@ -37,9 +41,14 @@ const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpFormInputsData>({ resolver: yupResolver(schema) })
+  const auth = getAuth()
 
   const onSubmit = (data: SignUpFormInputsData) => {
-    console.log(data)
+    createUserWithEmailAndPassword(auth, data.email, data.password).catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      console.log(errorCode + errorMessage)
+    })
   }
 
   const setAuthMethodToLogin = () => {

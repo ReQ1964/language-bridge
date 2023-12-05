@@ -15,6 +15,7 @@ import {
 } from '../AuthForms.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 type LogInFormInputsData = {
   email: string
@@ -36,9 +37,14 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<LogInFormInputsData>({ resolver: yupResolver(schema) })
+  const auth = getAuth()
 
   const onSubmit = (data: LogInFormInputsData) => {
-    console.log(data)
+    signInWithEmailAndPassword(auth, data.email, data.password).catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      console.log(errorCode + errorMessage)
+    })
   }
 
   const setAuthMethodToSignUp = () => {
