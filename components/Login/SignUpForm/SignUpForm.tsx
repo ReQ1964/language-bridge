@@ -4,7 +4,14 @@ import YupPassword from 'yup-password'
 YupPassword(yup)
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Input, Typography } from 'antd'
-import { SForm, Btn, HighlightedSpan, NextImage, ErrorMessage } from '../AuthForms.styles'
+import {
+  SForm,
+  Btn,
+  HighlightedSpan,
+  HighlightedSpanContainer,
+  NextImage,
+  ErrorMessage,
+} from '../AuthForms.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
 
@@ -109,10 +116,10 @@ const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
           Sign Up
         </Btn>
         <OutsideProvidersAuth />
-        <p>
+        <HighlightedSpanContainer>
           Already have an account?{' '}
           <HighlightedSpan onClick={setAuthMethodToLogin}>Log In</HighlightedSpan>
-        </p>
+        </HighlightedSpanContainer>
       </SForm>
     </>
   )

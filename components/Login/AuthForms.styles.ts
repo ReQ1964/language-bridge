@@ -14,15 +14,12 @@ const SForm = styled.form`
   h4 {
     text-align: center;
   }
-  p:last-child {
-    text-align: center;
-  }
 `
 
 const Btn = styled(Button)`
   background-color: ${(props) => props.theme.colors.background.primary.color};
   color: ${(props) => props.theme.colors.text.secondary};
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
 `
 
@@ -33,6 +30,10 @@ const HighlightedSpan = styled.span`
   &:hover {
     color: ${(props) => props.theme.colors.background.primary.shade1};
   }
+`
+
+const HighlightedSpanContainer = styled.p`
+  text-align: center;
 `
 
 const NextImage = styled(Image)`
@@ -47,6 +48,7 @@ const NextImage = styled(Image)`
 const ErrorMessage = styled.p`
   color: ${(props) => props.theme.colors.text.error};
   margin-top: 0.5rem;
+  text-align: left;
 `
 
 const ForgotPassword = styled.p`
@@ -55,4 +57,12 @@ const ForgotPassword = styled.p`
   margin-top: -0.9rem;
 `
 
-export { SForm, Btn, HighlightedSpan, NextImage, ErrorMessage, ForgotPassword }
+export {
+  SForm,
+  Btn,
+  HighlightedSpan,
+  HighlightedSpanContainer,
+  NextImage,
+  ErrorMessage,
+  ForgotPassword,
+}

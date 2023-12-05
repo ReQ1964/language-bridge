@@ -11,6 +11,7 @@ import {
   NextImage,
   ErrorMessage,
   ForgotPassword,
+  HighlightedSpanContainer,
 } from '../AuthForms.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
@@ -49,10 +50,6 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
       <NextImage src={formsPic} alt="Two people learning" />
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <h2>Log In</h2>
-        <p>
-          New to Language Bridge?{' '}
-          <HighlightedSpan onClick={setAuthMethodToSignUp}>Sign up</HighlightedSpan>
-        </p>
         <div>
           <Typography.Title level={5}>Email</Typography.Title>
           <Controller
@@ -98,6 +95,10 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
           Log In
         </Btn>
         <OutsideProvidersAuth />
+        <HighlightedSpanContainer>
+          New to Language Bridge?{' '}
+          <HighlightedSpan onClick={setAuthMethodToSignUp}>Sign up</HighlightedSpan>
+        </HighlightedSpanContainer>
       </SForm>
     </>
   )
