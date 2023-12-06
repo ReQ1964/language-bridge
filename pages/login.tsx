@@ -18,5 +18,3 @@ const LoginPage = () => {
 }
 
 export default withRouteProtection(LoginPage, '/account', true)
-
-// Check Auth on every page that requires it and redirect when needed. Check user login status before adding to favorite or doing tests and quizzes and display error popup + check auth on the page for more protection.
