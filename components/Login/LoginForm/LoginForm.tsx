@@ -16,6 +16,9 @@ import {
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { Modal } from 'antd'
+import { useState } from 'react'
+import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
 
 type LogInFormInputsData = {
   email: string
@@ -28,7 +31,7 @@ type LogInFormProps = {
 
 const schema = yup.object().shape({
   email: yup.string().email().required('email is a required field'),
-  password: yup.string().password().required('password is a required field'),
+  password: yup.string().required('password is a required field'),
 })
 
 const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
@@ -38,17 +41,28 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
     formState: { errors },
   } = useForm<LogInFormInputsData>({ resolver: yupResolver(schema) })
   const auth = getAuth()
+  const [loginError, setLoginError] = useState('')
+  const [modal, contextHolder] = Modal.useModal()
 
   const onSubmit = (data: LogInFormInputsData) => {
     signInWithEmailAndPassword(auth, data.email, data.password).catch((error) => {
-      const errorCode = error.code
-      const errorMessage = error.message
-      console.log(errorCode + errorMessage)
+      setLoginError(getMessageFromErrorCode(error.code))
+      showModal()
     })
   }
 
   const setAuthMethodToSignUp = () => {
     setAuthMethod('signup')
+  }
+
+  const modalConfig = {
+    title: 'Error!',
+    content: <ErrorMessage>{loginError}</ErrorMessage>,
+    centered: true,
+  }
+
+  const showModal = () => {
+    modal.error(modalConfig)
   }
 
   return (
@@ -106,6 +120,7 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
           <HighlightedSpan onClick={setAuthMethodToSignUp}>Sign up</HighlightedSpan>
         </HighlightedSpanContainer>
       </SForm>
+      {contextHolder}
     </>
   )
 }
