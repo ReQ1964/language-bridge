@@ -1,7 +1,7 @@
 export const getMessageFromErrorCode = (errorCode: string) => {
   switch (errorCode) {
     case 'account-exists-with-different-credential':
-    case 'auth/email-already-exists':
+    case 'auth/email-already-in-use':
       return 'Email already used. Go to the login page.'
     case 'auth/invalid-credential':
       return 'Wrong email/password combination.'

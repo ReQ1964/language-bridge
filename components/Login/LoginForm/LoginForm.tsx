@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import * as yup from 'yup'
 import YupPassword from 'yup-password'
 YupPassword(yup)
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Input, Typography } from 'antd'
+import { Input, Typography, Modal } from 'antd'
 import {
   SForm,
   Btn,
@@ -16,8 +17,6 @@ import {
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { Modal } from 'antd'
-import { useState } from 'react'
 import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
 
 type LogInFormInputsData = {
