@@ -1,74 +1,107 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import * as yup from 'yup'
 import YupPassword from 'yup-password'
-YupPassword(yup)
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Input, Typography, Modal } from 'antd'
 import {
   SForm,
   Btn,
   HighlightedSpan,
+  HighlightedSpanContainer,
   NextImage,
   ErrorMessage,
-  ForgotPassword,
-  HighlightedSpanContainer,
-} from '../AuthForms.styles'
+} from './AuthForm.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
 
-type LogInFormInputsData = {
+YupPassword(yup)
+
+type AuthFormInputsData = {
+  username?: string
   email: string
   password: string
 }
 
-type LogInFormProps = {
+type AuthFormProps = {
+  title: string
   setAuthMethod: (method: 'login' | 'signup') => void
+  onSubmit: (data: AuthFormInputsData) => void
+  schema: yup.AnyObjectSchema
+  errorCode: string
+  setErrorCode: (arg0: string) => void
 }
 
-const schema = yup.object().shape({
-  email: yup.string().email().required('email is a required field'),
-  password: yup.string().required('password is a required field'),
-})
-
-const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
+const AuthForm = ({
+  title,
+  setAuthMethod,
+  onSubmit,
+  schema,
+  errorCode,
+  setErrorCode,
+}: AuthFormProps) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LogInFormInputsData>({ resolver: yupResolver(schema) })
-  const auth = getAuth()
-  const [loginError, setLoginError] = useState('')
+  } = useForm<AuthFormInputsData>({ resolver: yupResolver(schema) })
   const [modal, contextHolder] = Modal.useModal()
 
-  const onSubmit = (data: LogInFormInputsData) => {
-    signInWithEmailAndPassword(auth, data.email, data.password).catch((error) => {
-      setLoginError(getMessageFromErrorCode(error.code))
+  const onFormSubmit = (data: AuthFormInputsData) => {
+    if (errorCode) {
       showModal()
-    })
-  }
-
-  const setAuthMethodToSignUp = () => {
-    setAuthMethod('signup')
-  }
-
-  const modalConfig = {
-    title: 'Error!',
-    content: <ErrorMessage>{loginError}</ErrorMessage>,
-    centered: true,
+    } else {
+      onSubmit(data)
+    }
   }
 
   const showModal = () => {
-    modal.error(modalConfig)
+    const errorMessage = getMessageFromErrorCode(errorCode)
+
+    modal.error({
+      title: 'Error!',
+      content: <ErrorMessage>{errorMessage}</ErrorMessage>,
+      centered: true,
+      onOk: () => {
+        setErrorCode('')
+      },
+    })
   }
+
+  useEffect(() => {
+    if (errorCode) {
+      showModal()
+    }
+  })
 
   return (
     <>
       <NextImage src={formsPic} alt="Two people learning" priority={true} />
-      <SForm onSubmit={handleSubmit(onSubmit)}>
-        <h2>Log In</h2>
+      <SForm onSubmit={handleSubmit(onFormSubmit)}>
+        <h2>{title}</h2>
+        {schema.fields.username && (
+          <div>
+            <Typography.Title level={5}>Username</Typography.Title>
+            <Controller
+              control={control}
+              name="username"
+              render={({ field: { onChange, onBlur } }) => (
+                <>
+                  <Input
+                    size="large"
+                    placeholder="Enter your username"
+                    type="text"
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    status={errors.username ? 'error' : ''}
+                  />
+                  {errors.username && <ErrorMessage>{errors.username?.message}</ErrorMessage>}
+                </>
+              )}
+            ></Controller>
+          </div>
+        )}
         <div>
           <Typography.Title level={5}>Email</Typography.Title>
           <Controller
@@ -110,14 +143,22 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
             )}
           ></Controller>
         </div>
-        <ForgotPassword>Forgot password?</ForgotPassword>
         <Btn size="large" htmlType="submit">
-          Log In
+          {title}
         </Btn>
         <OutsideProvidersAuth />
         <HighlightedSpanContainer>
-          New to Language Bridge?{' '}
-          <HighlightedSpan onClick={setAuthMethodToSignUp}>Sign up</HighlightedSpan>
+          {title === 'Log In' ? (
+            <>
+              New to Language Bridge?{' '}
+              <HighlightedSpan onClick={() => setAuthMethod('signup')}>Sign up</HighlightedSpan>
+            </>
+          ) : (
+            <>
+              Already have an account?{' '}
+              <HighlightedSpan onClick={() => setAuthMethod('login')}>Log In</HighlightedSpan>
+            </>
+          )}
         </HighlightedSpanContainer>
       </SForm>
       {contextHolder}
@@ -125,4 +166,4 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
   )
 }
 
-export default LogInForm
+export default AuthForm

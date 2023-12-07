@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { IconsContainer, ProvidersHeading } from './OutsideProvidersAuth.styles'
-import { ErrorMessage } from '../AuthForms.styles'
+import { ErrorMessage } from '../AuthForm/AuthForm.styles'
 import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth'
 import { auth } from '@/firebase/config'
 import { Modal } from 'antd'
