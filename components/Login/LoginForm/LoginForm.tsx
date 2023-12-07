@@ -66,7 +66,7 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
 
   return (
     <>
-      <NextImage src={formsPic} alt="Two people learning" />
+      <NextImage src={formsPic} alt="Two people learning" priority={true} />
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <h2>Log In</h2>
         <div>
@@ -103,6 +103,7 @@ const LogInForm = ({ setAuthMethod }: LogInFormProps) => {
                   onChange={onChange}
                   onBlur={onBlur}
                   status={errors.password ? 'error' : ''}
+                  autoComplete="on"
                 />
                 {errors.password && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
               </>

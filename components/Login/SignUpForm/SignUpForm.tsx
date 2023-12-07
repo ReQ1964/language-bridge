@@ -15,7 +15,7 @@ import {
 } from '../AuthForms.styles'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
 
 type SignUpFormInputsData = {
@@ -48,11 +48,19 @@ const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
   const [modal, contextHolder] = Modal.useModal()
 
   const onSubmit = (data: SignUpFormInputsData) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password).catch((error) => {
-      console.log(error.code)
-      setLoginError(getMessageFromErrorCode(error.code))
-      showModal()
-    })
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        if (auth.currentUser) {
+          updateProfile(auth.currentUser, {
+            displayName: data.username,
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error.code)
+        setLoginError(getMessageFromErrorCode(error.code))
+        showModal()
+      })
   }
 
   const setAuthMethodToLogin = () => {
@@ -71,7 +79,7 @@ const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
 
   return (
     <>
-      <NextImage src={formsPic} alt="Two people learning" />
+      <NextImage src={formsPic} alt="Two people learning" priority={true} />
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <h2>Sign Up</h2>
         <div>
@@ -128,6 +136,7 @@ const SignUpForm = ({ setAuthMethod }: SignUpFormProps) => {
                   onChange={onChange}
                   onBlur={onBlur}
                   status={errors.password ? 'error' : ''}
+                  autoComplete="on"
                 />
                 {errors.password && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
               </>
