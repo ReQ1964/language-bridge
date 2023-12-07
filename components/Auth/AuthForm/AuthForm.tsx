@@ -77,7 +77,14 @@ const AuthForm = ({
 
   return (
     <>
-      <NextImage src={formsPic} alt="Two people learning" priority={true} />
+      <NextImage
+        src={formsPic}
+        alt="Two people learning"
+        priority={true}
+        height={100}
+        width={100}
+        unoptimized
+      />
       <SForm onSubmit={handleSubmit(onFormSubmit)}>
         <h2>{title}</h2>
         {schema.fields.username && (
