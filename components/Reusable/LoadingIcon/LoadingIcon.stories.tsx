@@ -12,3 +12,7 @@ type Story = StoryObj<typeof LoadingIcon>
 export const Default: Story = {
   render: () => <LoadingIcon />,
 }
+
+export const Fullscreen: Story = {
+  render: () => <LoadingIcon fullscreen />,
+}
