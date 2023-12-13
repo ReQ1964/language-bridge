@@ -7,17 +7,13 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth'
+import { TopImage } from '@/components/Auth/AuthForm/AuthForm.styles'
 import { auth } from '@/firebase/config'
+import formsPic from '@/public/images/login/forms-pic.jpg'
 
 const AuthPage = () => {
   const [authMethod, setAuthMethod] = useState('login')
   const [errorCode, setErrorCode] = useState('')
-
-  const switchAuthMethod = () => {
-    setAuthMethod((prevState) => {
-      return prevState === 'login' ? 'signup' : 'login'
-    })
-  }
 
   type SignUpFormInputsData = {
     username?: string
@@ -64,23 +60,70 @@ const AuthPage = () => {
     })
   }
 
+  type PasswordResetFormInputsData = {
+    email: string
+  }
+
+  const passwordResetSchema = yup.object().shape({
+    email: yup.string().email().required('Email is a required field'),
+  })
+
+  const onPasswordReset = (data: PasswordResetFormInputsData) => {
+    console.log(data)
+  }
+
   return (
     <>
-      {authMethod === 'login' ? (
+      <TopImage
+        src={formsPic}
+        alt="Two people learning"
+        priority={true}
+        height={100}
+        width={100}
+        unoptimized
+      />
+
+      {authMethod === 'login' && (
         <AuthForm
           title="Log In"
-          setAuthMethod={switchAuthMethod}
+          btnText="Log In"
+          inputs={[
+            { name: 'email', type: 'text' },
+            { name: 'password', type: 'password' },
+          ]}
+          setAuthMethod={setAuthMethod}
           onSubmit={onLogin}
           schema={loginSchema}
           errorCode={errorCode}
           setErrorCode={setErrorCode}
         />
-      ) : (
+      )}
+
+      {authMethod === 'signup' && (
         <AuthForm
           title="Sign Up"
-          setAuthMethod={switchAuthMethod}
+          btnText="Sign Up"
+          inputs={[
+            { name: 'username', type: 'text' },
+            { name: 'email', type: 'text' },
+            { name: 'password', type: 'password' },
+          ]}
+          setAuthMethod={setAuthMethod}
           onSubmit={onSignUp}
           schema={signUpSchema}
+          errorCode={errorCode}
+          setErrorCode={setErrorCode}
+        />
+      )}
+
+      {authMethod === 'password-reset' && (
+        <AuthForm
+          title="Password Reset"
+          btnText="Continue"
+          inputs={[{ name: 'email', type: 'text' }]}
+          setAuthMethod={setAuthMethod}
+          onSubmit={onPasswordReset}
+          schema={passwordResetSchema}
           errorCode={errorCode}
           setErrorCode={setErrorCode}
         />

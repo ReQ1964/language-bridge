@@ -9,12 +9,12 @@ import {
   Btn,
   HighlightedSpan,
   HighlightedSpanContainer,
-  NextImage,
   ErrorMessage,
+  ForgotPassword,
 } from './AuthForm.styles'
-import formsPic from '@/public/images/login/forms-pic.jpg'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
 import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
+import capitalizeWord from '@/utils/capitalizeWord'
 
 YupPassword(yup)
 
@@ -24,9 +24,16 @@ type AuthFormInputsData = {
   password: string
 }
 
+type InputsProps = {
+  name: 'email' | 'username' | 'password'
+  type: string
+}
+
 type AuthFormProps = {
   title: string
-  setAuthMethod: (method: 'login' | 'signup') => void
+  inputs: Array<InputsProps>
+  btnText: string
+  setAuthMethod: (method: 'login' | 'signup' | 'password-reset') => void
   onSubmit: (data: AuthFormInputsData) => void
   schema: yup.AnyObjectSchema
   errorCode: string
@@ -35,6 +42,8 @@ type AuthFormProps = {
 
 const AuthForm = ({
   title,
+  inputs,
+  btnText,
   setAuthMethod,
   onSubmit,
   schema,
@@ -77,92 +86,57 @@ const AuthForm = ({
 
   return (
     <>
-      <NextImage
-        src={formsPic}
-        alt="Two people learning"
-        priority={true}
-        height={100}
-        width={100}
-        unoptimized
-      />
       <SForm onSubmit={handleSubmit(onFormSubmit)}>
         <h2>{title}</h2>
-        {schema.fields.username && (
-          <div>
-            <Typography.Title level={5}>Username</Typography.Title>
-            <Controller
-              control={control}
-              name="username"
-              render={({ field: { onChange, onBlur } }) => (
-                <>
-                  <Input
-                    size="large"
-                    placeholder="Enter your username"
-                    type="text"
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    status={errors.username ? 'error' : ''}
-                  />
-                  {errors.username && <ErrorMessage>{errors.username?.message}</ErrorMessage>}
-                </>
-              )}
-            ></Controller>
-          </div>
-        )}
-        <div>
-          <Typography.Title level={5}>Email</Typography.Title>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, onBlur } }) => (
-              <>
-                <Input
-                  size="large"
-                  placeholder="Enter your email"
-                  type="text"
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  status={errors.email ? 'error' : ''}
-                />
-                {errors.email && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
-              </>
-            )}
-          ></Controller>
-        </div>
-        <div>
-          <Typography.Title level={5}>Password</Typography.Title>
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur } }) => (
-              <>
-                <Input
-                  size="large"
-                  placeholder="Enter your password"
-                  type="password"
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  status={errors.password ? 'error' : ''}
-                  autoComplete="on"
-                />
-                {errors.password && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
-              </>
-            )}
-          ></Controller>
-        </div>
+        {inputs.map((input) => {
+          const { name, type } = input
+
+          return (
+            <div key={name}>
+              <Typography.Title level={5}>{capitalizeWord(name)}</Typography.Title>
+              <Controller
+                control={control}
+                name={name}
+                render={({ field: { onChange, onBlur } }) => (
+                  <>
+                    <Input
+                      size="large"
+                      placeholder={`Enter your ${name}`}
+                      type={type}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      status={errors.username ? 'error' : ''}
+                    />
+                    {errors[name] && <ErrorMessage>{errors[name]?.message}</ErrorMessage>}
+                  </>
+                )}
+              ></Controller>
+            </div>
+          )
+        })}
+        {title === 'Log In' ? (
+          <ForgotPassword onClick={() => setAuthMethod('password-reset')}>
+            Forgot Password?
+          </ForgotPassword>
+        ) : null}
         <Btn size="large" htmlType="submit">
-          {title}
+          {btnText}
         </Btn>
-        <OutsideProvidersAuth />
+        {title === 'Password Reset' ? null : <OutsideProvidersAuth />}
         <HighlightedSpanContainer>
           {title === 'Log In' ? (
             <>
               New to Language Bridge?{' '}
               <HighlightedSpan onClick={() => setAuthMethod('signup')}>Sign up</HighlightedSpan>
             </>
-          ) : (
+          ) : title === 'Sign Up' ? (
             <>
               Already have an account?{' '}
+              <HighlightedSpan onClick={() => setAuthMethod('login')}>Log In</HighlightedSpan>
+            </>
+          ) : (
+            <>
+              Return to{' '}
               <HighlightedSpan onClick={() => setAuthMethod('login')}>Log In</HighlightedSpan>
             </>
           )}
