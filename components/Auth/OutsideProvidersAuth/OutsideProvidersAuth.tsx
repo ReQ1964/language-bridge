@@ -1,27 +1,14 @@
 import { useState, useEffect } from 'react'
 import { IconsContainer, ProvidersHeading } from './OutsideProvidersAuth.styles'
-import { ErrorMessage } from '../AuthForm/AuthForm.styles'
 import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth'
 import { auth } from '@/firebase/config'
-import { Modal } from 'antd'
 import googleIcon from '@/public/icons/socials/google.svg'
 import Image from 'next/image'
-import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
+import AuthErrorModal from '../AuthErrorModal/AuthErrorModal'
 
 const OutsideProvidersAuth = () => {
   const provider = new GoogleAuthProvider()
-  const [loginError, setLoginError] = useState('')
-  const [modal, contextHolder] = Modal.useModal()
-
-  const modalConfig = {
-    title: 'Error!',
-    content: <ErrorMessage>{loginError}</ErrorMessage>,
-    centered: true,
-  }
-
-  const showModal = () => {
-    modal.error(modalConfig)
-  }
+  const [errorCode, setErrorCode] = useState('')
 
   const signInWithGoogle = () => {
     signInWithRedirect(auth, provider)
@@ -29,8 +16,7 @@ const OutsideProvidersAuth = () => {
 
   useEffect(() => {
     getRedirectResult(auth).catch((error) => {
-      setLoginError(getMessageFromErrorCode(error.code))
-      showModal()
+      setErrorCode(error.code)
     })
   })
 
@@ -46,7 +32,7 @@ const OutsideProvidersAuth = () => {
           onClick={signInWithGoogle}
         />
       </IconsContainer>
-      {contextHolder}
+      <AuthErrorModal errorCode={errorCode} setErrorCode={setErrorCode} />
     </article>
   )
 }

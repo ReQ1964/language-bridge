@@ -10,6 +10,7 @@ import {
 import { TopImage } from '@/components/Auth/AuthForm/AuthForm.styles'
 import { auth } from '@/firebase/config'
 import formsPic from '@/public/images/login/forms-pic.jpg'
+import AuthErrorModal from '@/components/Auth/AuthErrorModal/AuthErrorModal'
 
 const AuthPage = () => {
   const [authMethod, setAuthMethod] = useState('login')
@@ -94,8 +95,6 @@ const AuthPage = () => {
           setAuthMethod={setAuthMethod}
           onSubmit={onLogin}
           schema={loginSchema}
-          errorCode={errorCode}
-          setErrorCode={setErrorCode}
         />
       )}
 
@@ -111,8 +110,6 @@ const AuthPage = () => {
           setAuthMethod={setAuthMethod}
           onSubmit={onSignUp}
           schema={signUpSchema}
-          errorCode={errorCode}
-          setErrorCode={setErrorCode}
         />
       )}
 
@@ -124,10 +121,9 @@ const AuthPage = () => {
           setAuthMethod={setAuthMethod}
           onSubmit={onPasswordReset}
           schema={passwordResetSchema}
-          errorCode={errorCode}
-          setErrorCode={setErrorCode}
         />
       )}
+      <AuthErrorModal errorCode={errorCode} setErrorCode={setErrorCode} />
     </>
   )
 }

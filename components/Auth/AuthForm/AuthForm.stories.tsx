@@ -16,8 +16,6 @@ export const LogIn: Story = {
     setAuthMethod: () => {},
     onSubmit: () => {},
     schema: yup.object().shape({}),
-    errorCode: '',
-    setErrorCode: () => {},
   },
 }
 
@@ -31,6 +29,5 @@ export const SignUp: Story = {
 export const Error: Story = {
   args: {
     ...LogIn.args,
-    errorCode: 'dummy_error',
   },
 }
