@@ -31,7 +31,7 @@ type AuthFormProps = {
   title: string
   inputs: Array<InputsProps>
   btnText: string
-  setAuthMethod: (method: 'login' | 'signup' | 'password-reset') => void
+  setAuthMethod: () => void
   onSubmit: (data: AuthFormInputsData) => void
   schema: yup.AnyObjectSchema
 }
@@ -73,30 +73,31 @@ const AuthForm = ({ title, inputs, btnText, setAuthMethod, onSubmit, schema }: A
             </div>
           )
         })}
-        {title === 'Log In' ? (
-          <ForgotPassword onClick={() => setAuthMethod('password-reset')}>
-            Forgot Password?
-          </ForgotPassword>
-        ) : null}
+
+        {title === 'Log In' && (
+          <ForgotPassword onClick={setAuthMethod}>Forgot Password?</ForgotPassword>
+        )}
+
         <Btn size="large" htmlType="submit">
           {btnText}
         </Btn>
-        {title === 'Password Reset' ? null : <OutsideProvidersAuth />}
+
+        {title !== 'Password Reset' && <OutsideProvidersAuth />}
+
         <HighlightedSpanContainer>
           {title === 'Log In' ? (
             <>
               New to Language Bridge?{' '}
-              <HighlightedSpan onClick={() => setAuthMethod('signup')}>Sign up</HighlightedSpan>
+              <HighlightedSpan onClick={setAuthMethod}>Sign up</HighlightedSpan>
             </>
           ) : title === 'Sign Up' ? (
             <>
               Already have an account?{' '}
-              <HighlightedSpan onClick={() => setAuthMethod('login')}>Log In</HighlightedSpan>
+              <HighlightedSpan onClick={setAuthMethod}>Log In</HighlightedSpan>
             </>
           ) : (
             <>
-              Return to{' '}
-              <HighlightedSpan onClick={() => setAuthMethod('login')}>Log In</HighlightedSpan>
+              Return to <HighlightedSpan onClick={setAuthMethod}>Log In</HighlightedSpan>
             </>
           )}
         </HighlightedSpanContainer>

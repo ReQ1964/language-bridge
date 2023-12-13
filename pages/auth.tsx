@@ -12,9 +12,20 @@ import { auth } from '@/firebase/config'
 import formsPic from '@/public/images/login/forms-pic.jpg'
 import AuthErrorModal from '@/components/Auth/AuthErrorModal/AuthErrorModal'
 
+enum AuthMethods {
+  Login = 'login',
+  Signup = 'signup',
+  PasswordReset = 'password-reset',
+}
+
 const AuthPage = () => {
-  const [authMethod, setAuthMethod] = useState('login')
+  const [authMethod, setAuthMethod] = useState(AuthMethods.Login)
   const [errorCode, setErrorCode] = useState('')
+
+  const handleAuthError = (error: { code: string }) => {
+    console.error(`Authentication error: ${error.code}`)
+    setErrorCode(error.code)
+  }
 
   type SignUpFormInputsData = {
     username?: string
@@ -40,9 +51,7 @@ const AuthPage = () => {
           })
         }
       })
-      .catch((error) => {
-        setErrorCode(error.code)
-      })
+      .catch(handleAuthError)
   }
 
   type LogInFormInputsData = {
@@ -51,14 +60,12 @@ const AuthPage = () => {
   }
 
   const loginSchema = yup.object().shape({
-    email: yup.string().email().required('Email is a required field'),
-    password: yup.string().required('Password is a required field'),
+    email: yup.string().email().required('email is required'),
+    password: yup.string().required('password is required'),
   })
 
   const onLogin = (data: LogInFormInputsData) => {
-    signInWithEmailAndPassword(auth, data.email, data.password).catch((error) => {
-      setErrorCode(error.code)
-    })
+    signInWithEmailAndPassword(auth, data.email, data.password).catch(handleAuthError)
   }
 
   type PasswordResetFormInputsData = {
@@ -66,7 +73,7 @@ const AuthPage = () => {
   }
 
   const passwordResetSchema = yup.object().shape({
-    email: yup.string().email().required('Email is a required field'),
+    email: yup.string().email().required('emial is required'),
   })
 
   const onPasswordReset = (data: PasswordResetFormInputsData) => {
@@ -84,7 +91,7 @@ const AuthPage = () => {
         unoptimized
       />
 
-      {authMethod === 'login' && (
+      {authMethod === AuthMethods.Login && (
         <AuthForm
           title="Log In"
           btnText="Log In"
@@ -92,13 +99,13 @@ const AuthPage = () => {
             { name: 'email', type: 'text' },
             { name: 'password', type: 'password' },
           ]}
-          setAuthMethod={setAuthMethod}
+          setAuthMethod={() => setAuthMethod(AuthMethods.Signup)}
           onSubmit={onLogin}
           schema={loginSchema}
         />
       )}
 
-      {authMethod === 'signup' && (
+      {authMethod === AuthMethods.Signup && (
         <AuthForm
           title="Sign Up"
           btnText="Sign Up"
@@ -107,18 +114,18 @@ const AuthPage = () => {
             { name: 'email', type: 'text' },
             { name: 'password', type: 'password' },
           ]}
-          setAuthMethod={setAuthMethod}
+          setAuthMethod={() => setAuthMethod(AuthMethods.Login)}
           onSubmit={onSignUp}
           schema={signUpSchema}
         />
       )}
 
-      {authMethod === 'password-reset' && (
+      {authMethod === AuthMethods.PasswordReset && (
         <AuthForm
           title="Password Reset"
           btnText="Continue"
           inputs={[{ name: 'email', type: 'text' }]}
-          setAuthMethod={setAuthMethod}
+          setAuthMethod={() => setAuthMethod(AuthMethods.Login)}
           onSubmit={onPasswordReset}
           schema={passwordResetSchema}
         />
