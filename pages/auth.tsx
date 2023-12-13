@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth'
 import { TopImage } from '@/components/Auth/AuthForm/AuthForm.styles'
 import { auth } from '@/firebase/config'
@@ -77,7 +78,7 @@ const AuthPage = () => {
   })
 
   const onPasswordReset = (data: PasswordResetFormInputsData) => {
-    console.log(data)
+    sendPasswordResetEmail(auth, data.email).catch(handleAuthError)
   }
 
   return (
@@ -99,7 +100,7 @@ const AuthPage = () => {
             { name: 'email', type: 'text' },
             { name: 'password', type: 'password' },
           ]}
-          setAuthMethod={() => setAuthMethod(AuthMethods.Signup)}
+          setAuthMethod={setAuthMethod}
           onSubmit={onLogin}
           schema={loginSchema}
         />
@@ -114,7 +115,7 @@ const AuthPage = () => {
             { name: 'email', type: 'text' },
             { name: 'password', type: 'password' },
           ]}
-          setAuthMethod={() => setAuthMethod(AuthMethods.Login)}
+          setAuthMethod={setAuthMethod}
           onSubmit={onSignUp}
           schema={signUpSchema}
         />
@@ -125,7 +126,7 @@ const AuthPage = () => {
           title="Password Reset"
           btnText="Continue"
           inputs={[{ name: 'email', type: 'text' }]}
-          setAuthMethod={() => setAuthMethod(AuthMethods.Login)}
+          setAuthMethod={setAuthMethod}
           onSubmit={onPasswordReset}
           schema={passwordResetSchema}
         />

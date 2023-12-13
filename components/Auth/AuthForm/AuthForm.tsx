@@ -16,6 +16,12 @@ import capitalizeWord from '@/utils/capitalizeWord'
 
 YupPassword(yup)
 
+enum AuthMethods {
+  Login = 'login',
+  Signup = 'signup',
+  PasswordReset = 'password-reset',
+}
+
 type AuthFormInputsData = {
   username?: string
   email: string
@@ -31,7 +37,7 @@ type AuthFormProps = {
   title: string
   inputs: Array<InputsProps>
   btnText: string
-  setAuthMethod: () => void
+  setAuthMethod: (method: AuthMethods) => void
   onSubmit: (data: AuthFormInputsData) => void
   schema: yup.AnyObjectSchema
 }
@@ -75,7 +81,9 @@ const AuthForm = ({ title, inputs, btnText, setAuthMethod, onSubmit, schema }: A
         })}
 
         {title === 'Log In' && (
-          <ForgotPassword onClick={setAuthMethod}>Forgot Password?</ForgotPassword>
+          <ForgotPassword onClick={() => setAuthMethod(AuthMethods.PasswordReset)}>
+            Forgot Password?
+          </ForgotPassword>
         )}
 
         <Btn size="large" htmlType="submit">
@@ -88,16 +96,23 @@ const AuthForm = ({ title, inputs, btnText, setAuthMethod, onSubmit, schema }: A
           {title === 'Log In' ? (
             <>
               New to Language Bridge?{' '}
-              <HighlightedSpan onClick={setAuthMethod}>Sign up</HighlightedSpan>
+              <HighlightedSpan onClick={() => setAuthMethod(AuthMethods.Login)}>
+                Sign up
+              </HighlightedSpan>
             </>
           ) : title === 'Sign Up' ? (
             <>
               Already have an account?{' '}
-              <HighlightedSpan onClick={setAuthMethod}>Log In</HighlightedSpan>
+              <HighlightedSpan onClick={() => setAuthMethod(AuthMethods.Signup)}>
+                Log In
+              </HighlightedSpan>
             </>
           ) : (
             <>
-              Return to <HighlightedSpan onClick={setAuthMethod}>Log In</HighlightedSpan>
+              Return to{' '}
+              <HighlightedSpan onClick={() => setAuthMethod(AuthMethods.Login)}>
+                Log In
+              </HighlightedSpan>
             </>
           )}
         </HighlightedSpanContainer>
