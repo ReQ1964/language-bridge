@@ -4,7 +4,9 @@ import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'fireb
 import { auth } from '@/firebase/config'
 import googleIcon from '@/public/icons/socials/google.svg'
 import Image from 'next/image'
-import AuthErrorModal from '../AuthErrorModal/AuthErrorModal'
+import AuthModal from '../AuthModal/AuthModal'
+import { ErrorMessage } from '../AuthForm/AuthForm.styles'
+import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
 
 const OutsideProvidersAuth = () => {
   const provider = new GoogleAuthProvider()
@@ -32,7 +34,12 @@ const OutsideProvidersAuth = () => {
           onClick={signInWithGoogle}
         />
       </IconsContainer>
-      <AuthErrorModal errorCode={errorCode} setErrorCode={setErrorCode} />
+      <AuthModal
+        title="Error!"
+        content={<ErrorMessage>{getMessageFromErrorCode(errorCode)}</ErrorMessage>}
+        onOk={() => setErrorCode('')}
+        isVisible={errorCode ? true : false}
+      />
     </article>
   )
 }

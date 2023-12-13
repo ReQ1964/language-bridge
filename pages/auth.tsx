@@ -11,7 +11,9 @@ import {
 import { TopImage } from '@/components/Auth/AuthForm/AuthForm.styles'
 import { auth } from '@/firebase/config'
 import formsPic from '@/public/images/login/forms-pic.jpg'
-import AuthErrorModal from '@/components/Auth/AuthErrorModal/AuthErrorModal'
+import AuthModal from '@/components/Auth/AuthModal/AuthModal'
+import { ErrorMessage } from '@/components/Auth/AuthForm/AuthForm.styles'
+import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
 
 enum AuthMethods {
   Login = 'login',
@@ -22,6 +24,7 @@ enum AuthMethods {
 const AuthPage = () => {
   const [authMethod, setAuthMethod] = useState(AuthMethods.Login)
   const [errorCode, setErrorCode] = useState('')
+  const [isLinkSent, setIsLinkSent] = useState(false)
 
   const handleAuthError = (error: { code: string }) => {
     console.error(`Authentication error: ${error.code}`)
@@ -78,7 +81,9 @@ const AuthPage = () => {
   })
 
   const onPasswordReset = (data: PasswordResetFormInputsData) => {
-    sendPasswordResetEmail(auth, data.email).catch(handleAuthError)
+    sendPasswordResetEmail(auth, data.email)
+      .then(() => setIsLinkSent(true))
+      .catch(handleAuthError)
   }
 
   return (
@@ -91,7 +96,6 @@ const AuthPage = () => {
         width={100}
         unoptimized
       />
-
       {authMethod === AuthMethods.Login && (
         <AuthForm
           title="Log In"
@@ -105,7 +109,6 @@ const AuthPage = () => {
           schema={loginSchema}
         />
       )}
-
       {authMethod === AuthMethods.Signup && (
         <AuthForm
           title="Sign Up"
@@ -120,7 +123,6 @@ const AuthPage = () => {
           schema={signUpSchema}
         />
       )}
-
       {authMethod === AuthMethods.PasswordReset && (
         <AuthForm
           title="Password Reset"
@@ -131,7 +133,18 @@ const AuthPage = () => {
           schema={passwordResetSchema}
         />
       )}
-      <AuthErrorModal errorCode={errorCode} setErrorCode={setErrorCode} />
+      <AuthModal
+        title="Error!"
+        content={<ErrorMessage>{getMessageFromErrorCode(errorCode)}</ErrorMessage>}
+        onOk={() => setErrorCode('')}
+        isVisible={errorCode ? true : false}
+      />
+      <AuthModal
+        title="Link was sent!"
+        content="Please, check your inbox for a password reset link."
+        onOk={() => setIsLinkSent(false)}
+        isVisible={isLinkSent}
+      />
     </>
   )
 }
