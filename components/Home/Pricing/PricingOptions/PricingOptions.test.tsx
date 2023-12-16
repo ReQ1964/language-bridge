@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import * as stories from './PricingOptions.stories'
 import { composeStories } from '@storybook/react'
 import ThemesProvider from '@/theme/ThemesProvider'
-import { PricingProps } from '@/interfaces/PricingProps'
+import { PricingProps } from '@/types/PricingProps'
 
 const { Default } = composeStories(stories)
 

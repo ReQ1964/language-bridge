@@ -1,18 +1,18 @@
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import YupPassword from 'yup-password'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Input, Typography } from 'antd'
 import {
   SForm,
   Btn,
   HighlightedSpan,
   HighlightedSpanContainer,
-  ErrorMessage,
   ForgotPassword,
 } from './AuthForm.styles'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
-import capitalizeWord from '@/utils/capitalizeWord'
+import AuthInput from '../AuthInput/AuthInput'
+import { InputTypes } from '@/types/Auth/InputTypes'
+import { AuthFormInputs } from '@/types/Auth/AuthFormInputs'
 
 YupPassword(yup)
 
@@ -22,14 +22,8 @@ enum AuthMethods {
   PasswordReset = 'password-reset',
 }
 
-type AuthFormInputsData = {
-  username?: string
-  email: string
-  password: string
-}
-
 type InputsProps = {
-  name: 'email' | 'username' | 'password'
+  name: InputTypes
   type: string
 }
 
@@ -38,7 +32,7 @@ type AuthFormProps = {
   inputs: Array<InputsProps>
   btnText: string
   setAuthMethod: (method: AuthMethods) => void
-  onSubmit: (data: AuthFormInputsData) => void
+  onSubmit: (data: AuthFormInputs) => void
   schema: yup.AnyObjectSchema
 }
 
@@ -47,37 +41,16 @@ const AuthForm = ({ title, inputs, btnText, setAuthMethod, onSubmit, schema }: A
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthFormInputsData>({ resolver: yupResolver(schema) })
+  } = useForm<AuthFormInputs>({ resolver: yupResolver(schema) })
 
   return (
     <>
       <SForm onSubmit={handleSubmit(onSubmit)}>
         <h2>{title}</h2>
+
         {inputs.map((input) => {
           const { name, type } = input
-
-          return (
-            <div key={name}>
-              <Typography.Title level={5}>{capitalizeWord(name)}</Typography.Title>
-              <Controller
-                control={control}
-                name={name}
-                render={({ field: { onChange, onBlur } }) => (
-                  <>
-                    <Input
-                      size="large"
-                      placeholder={`Enter your ${name}`}
-                      type={type}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      status={errors.username ? 'error' : ''}
-                    />
-                    {errors[name] && <ErrorMessage>{errors[name]?.message}</ErrorMessage>}
-                  </>
-                )}
-              ></Controller>
-            </div>
-          )
+          return <AuthInput key={name} control={control} name={name} type={type} errors={errors} />
         })}
 
         {title === 'Log In' && (

@@ -135,12 +135,14 @@ const AuthPage = () => {
       )}
       <AuthModal
         title="Error!"
+        type="error"
         content={<ErrorMessage>{getMessageFromErrorCode(errorCode)}</ErrorMessage>}
         onOk={() => setErrorCode('')}
         isVisible={errorCode ? true : false}
       />
       <AuthModal
         title="Link was sent!"
+        type="info"
         content="Please, check your inbox for a password reset link."
         onOk={() => setIsLinkSent(false)}
         isVisible={isLinkSent}

@@ -3,24 +3,25 @@ import { ReactElement, useEffect } from 'react'
 
 type AuthModalTypes = {
   title: string
+  type: 'info' | 'error' | 'warning' | 'confirm'
   content: string | ReactElement
   onOk: () => void
   isVisible: boolean
 }
 
-const AuthModal = ({ title, content, onOk, isVisible }: AuthModalTypes) => {
+const AuthModal = ({ title, type, content, onOk, isVisible }: AuthModalTypes) => {
   const [modal, contextHolder] = Modal.useModal()
 
   useEffect(() => {
     if (isVisible) {
-      modal.info({
+      modal[type]({
         title,
         content,
         centered: true,
         onOk,
       })
     }
-  }, [isVisible, modal, title, content, onOk])
+  }, [title, type, content, isVisible, onOk, modal])
 
   return contextHolder
 }

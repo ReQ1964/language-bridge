@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SingleArticle from '../SingleArticle/SingleArticle'
-import { ArticleProps } from '@/interfaces/ArticleProps'
+import { ArticleProps } from '@/types/ArticleProps'
 import { ArticlesUL, ArticlesSection } from './ArticlesList.styles'
 
 const ArticlesList = ({ articles }: { articles: Array<ArticleProps> }) => {

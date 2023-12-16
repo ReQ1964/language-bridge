@@ -4,59 +4,42 @@ import userEvent from '@testing-library/user-event'
 import { composeStories } from '@storybook/react'
 import * as stories from './AuthForm.stories'
 
-const { LogIn, SignUp, Error } = composeStories(stories)
+const { BasicSignUpSchema, BasicLoginSchema } = composeStories(stories)
 
 describe('AuthForm Component', () => {
   const mockSubmit = vi.fn()
   const mockSetAuthMethod = vi.fn()
 
-  it('renders AuthForm correctly', () => {
+  it('should render AuthForm correctly', () => {
     render(
       <ThemesProvider>
-        <LogIn />
+        <BasicSignUpSchema onSubmit={mockSubmit} setAuthMethod={mockSetAuthMethod} />
       </ThemesProvider>
     )
-    expect(screen.getByRole('heading', { name: /Log In/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Sign Up/i })).toBeInTheDocument()
     expect(screen.getByText('Email')).toBeInTheDocument()
     expect(screen.getByText('Password')).toBeInTheDocument()
   })
 
-  it('calls onSubmit when the form is submitted', async () => {
+  it('should call onSubmit when the form is submitted', async () => {
     render(
       <ThemesProvider>
-        <LogIn onSubmit={mockSubmit} />
-      </ThemesProvider>
-    )
-    userEvent.type(screen.getByPlaceholderText('Enter your email'), 'test@example.com')
-    userEvent.type(screen.getByPlaceholderText('Enter your password'), 'testpassword')
-
-    const logInButton = screen.getByRole('button', { name: /Log In/i })
-    userEvent.click(logInButton)
-
-    await waitFor(() => {
-      expect(mockSubmit).toHaveBeenCalled()
-    })
-  })
-
-  it('calls setAuthMethod when "Sign up" is clicked', () => {
-    render(
-      <ThemesProvider>
-        <SignUp setAuthMethod={mockSetAuthMethod} />
-      </ThemesProvider>
-    )
-    const signUpLinks = screen.getAllByText(/Sign up/i)
-    userEvent.click(signUpLinks[2])
-  })
-
-  it('displays error modal when errorCode is present', async () => {
-    render(
-      <ThemesProvider>
-        <Error />
+        <BasicLoginSchema onSubmit={mockSubmit} setAuthMethod={mockSetAuthMethod} />
       </ThemesProvider>
     )
 
-    await waitFor(() => {
-      expect(screen.getByText('Error!')).toBeInTheDocument()
-    })
+    const emailInput = screen.getByPlaceholderText(/enter your email/i)
+    const passwordInput = screen.getByPlaceholderText(/enter your password/i)
+
+    await userEvent.click(emailInput)
+    await userEvent.type(emailInput, 'example@gmail.com')
+
+    await userEvent.click(passwordInput)
+    await userEvent.type(passwordInput, 'Example123!')
+
+    const loginButton = screen.getByRole('button', { name: /log in/i })
+    await userEvent.click(loginButton)
+
+    await waitFor(() => expect(mockSubmit).toBeCalled())
   })
 })

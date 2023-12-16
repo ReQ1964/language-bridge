@@ -2,7 +2,7 @@ import ReviewsHeading from '../ReviewsHeading/ReviewsHeading'
 import SingleReview from '../SingleReview/SingleReview'
 import { ReviewsSection } from './ReviewsList.styles'
 import { SwiperSlide } from 'swiper/react'
-import { ReviewProps } from '@/interfaces/ReviewProps'
+import { ReviewProps } from '@/types/ReviewProps'
 
 const ReviewsList = ({ reviews }: { reviews: Array<ReviewProps> }) => {
   return (

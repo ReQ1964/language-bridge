@@ -36,6 +36,7 @@ const OutsideProvidersAuth = () => {
       </IconsContainer>
       <AuthModal
         title="Error!"
+        type="error"
         content={<ErrorMessage>{getMessageFromErrorCode(errorCode)}</ErrorMessage>}
         onOk={() => setErrorCode('')}
         isVisible={errorCode ? true : false}

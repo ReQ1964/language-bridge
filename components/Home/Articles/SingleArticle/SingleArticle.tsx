@@ -1,6 +1,6 @@
 import ArticleFunfact from '../ArticleFunfact/ArticleFunfact'
 import Image from 'next/image'
-import { ArticleProps } from '@/interfaces/ArticleProps'
+import { ArticleProps } from '@/types/ArticleProps'
 import { ArticleItem } from './SingleArticle.styles'
 
 const SingleArticle = ({ image, imageAlt, title, description, funfact }: ArticleProps) => {
