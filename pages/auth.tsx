@@ -6,7 +6,7 @@ import {
   LogInFormInputs,
   PasswordResetFormInputs,
 } from '@/types/authTypes'
-import { signUpSchema, loginSchema, passwordResetSchema } from '@/yupSchema/auth.schema'
+import { signUpSchema, loginSchema, passwordResetSchema } from '@/schema/auth.schema'
 import withRouteProtection from '@/utils/withRouteProtection'
 import { handleAuthError } from '@/utils/handleAuthError'
 

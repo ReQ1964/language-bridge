@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import * as yup from 'yup'
-
 import AuthForm from './AuthForm'
+import { signUpSchema, loginSchema, passwordResetSchema } from '@/schema/auth.schema'
 
 const meta: Meta<typeof AuthForm> = {
   component: AuthForm,
@@ -10,16 +9,7 @@ const meta: Meta<typeof AuthForm> = {
 export default meta
 type Story = StoryObj<typeof AuthForm>
 
-const signUpSchema = yup.object().shape({
-  username: yup
-    .string()
-    .min(3, 'username must be at least 3 characters')
-    .required('username is required'),
-  email: yup.string().email('email must be valid').required('email is required'),
-  password: yup.string().password().required('password is required'),
-})
-
-export const BasicSignUpSchema: Story = {
+export const SignUpSchema: Story = {
   args: {
     title: 'Sign Up',
     inputs: [
@@ -34,12 +24,7 @@ export const BasicSignUpSchema: Story = {
   },
 }
 
-const loginSchema = yup.object().shape({
-  email: yup.string().email().required('email is required'),
-  password: yup.string().required('password is required'),
-})
-
-export const BasicLoginSchema: Story = {
+export const LoginSchema: Story = {
   args: {
     title: 'Log In',
     inputs: [
@@ -50,5 +35,16 @@ export const BasicLoginSchema: Story = {
     setAuthMethod: () => {},
     onSubmit: () => console.log('Login Request Sent!'),
     schema: loginSchema,
+  },
+}
+
+export const PasswordResetSchema: Story = {
+  args: {
+    title: 'Password Reset',
+    inputs: [{ name: 'email', type: 'text' }],
+    btnText: 'Continue',
+    setAuthMethod: () => {},
+    onSubmit: () => console.log('Password Reset Request Sent!'),
+    schema: passwordResetSchema,
   },
 }
