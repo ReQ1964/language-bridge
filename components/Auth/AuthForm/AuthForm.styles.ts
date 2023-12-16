@@ -36,7 +36,7 @@ const HighlightedSpanContainer = styled.p`
   text-align: center;
 `
 
-const NextImage = styled(Image)`
+const TopImage = styled(Image)`
   display: block;
   width: 100%;
   height: 80%;
@@ -62,7 +62,7 @@ export {
   Btn,
   HighlightedSpan,
   HighlightedSpanContainer,
-  NextImage,
+  TopImage,
   ErrorMessage,
   ForgotPassword,
 }

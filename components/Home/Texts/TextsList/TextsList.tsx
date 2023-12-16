@@ -1,4 +1,4 @@
-import { TextProps } from '@/interfaces/TextProps'
+import { TextProps } from '@/types/TextProps'
 import SingleText from '../SingleText/SingleText'
 import { TextsUl, TextsHeading, TextsSection } from './TextsList.styles'
 import LoadingIcon from '@/components/Reusable/LoadingIcon/LoadingIcon'

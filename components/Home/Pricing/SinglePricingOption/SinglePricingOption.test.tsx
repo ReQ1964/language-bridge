@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import ThemesProvider from '@/theme/ThemesProvider'
 import { composeStories } from '@storybook/react'
 import * as stories from './SinglePricingOption.stories'
-import { PricingProps } from '@/interfaces/PricingProps'
+import { PricingProps } from '@/types/PricingProps'
 
 const { FeaturedWithPrice } = composeStories(stories)
 

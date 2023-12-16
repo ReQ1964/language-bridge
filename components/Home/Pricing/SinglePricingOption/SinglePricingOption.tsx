@@ -6,7 +6,7 @@ import {
   AntDButton,
   Price,
 } from './SinglePricingOption.styles'
-import { PricingProps } from '@/interfaces/PricingProps'
+import { PricingProps } from '@/types/PricingProps'
 
 const SinglePricingOption = ({ type, price, features, featured }: PricingProps) => {
   return (

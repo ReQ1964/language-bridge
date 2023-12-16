@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import * as yup from 'yup'
-
 import AuthForm from './AuthForm'
+import { signUpSchema, loginSchema, passwordResetSchema } from '@/schema/auth.schema'
 
 const meta: Meta<typeof AuthForm> = {
   component: AuthForm,
@@ -10,27 +9,42 @@ const meta: Meta<typeof AuthForm> = {
 export default meta
 type Story = StoryObj<typeof AuthForm>
 
-export const LogIn: Story = {
+export const SignUpSchema: Story = {
+  args: {
+    title: 'Sign Up',
+    inputs: [
+      { name: 'email', type: 'text' },
+      { name: 'username', type: 'text' },
+      { name: 'password', type: 'password' },
+    ],
+    btnText: 'Sign Up',
+    setAuthMethod: () => {},
+    onSubmit: () => console.log('SignUp Request Sent!'),
+    schema: signUpSchema,
+  },
+}
+
+export const LoginSchema: Story = {
   args: {
     title: 'Log In',
+    inputs: [
+      { name: 'email', type: 'text' },
+      { name: 'password', type: 'password' },
+    ],
+    btnText: 'Log In',
     setAuthMethod: () => {},
-    onSubmit: () => {},
-    schema: yup.object().shape({}),
-    errorCode: '',
-    setErrorCode: () => {},
+    onSubmit: () => console.log('Login Request Sent!'),
+    schema: loginSchema,
   },
 }
 
-export const SignUp: Story = {
+export const PasswordResetSchema: Story = {
   args: {
-    ...LogIn.args,
-    title: 'Sign Up',
-  },
-}
-
-export const Error: Story = {
-  args: {
-    ...LogIn.args,
-    errorCode: 'dummy_error',
+    title: 'Password Reset',
+    inputs: [{ name: 'email', type: 'text' }],
+    btnText: 'Continue',
+    setAuthMethod: () => {},
+    onSubmit: () => console.log('Password Reset Request Sent!'),
+    schema: passwordResetSchema,
   },
 }

@@ -1,174 +1,113 @@
-import { useEffect } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import YupPassword from 'yup-password'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Input, Typography, Modal } from 'antd'
 import {
   SForm,
   Btn,
   HighlightedSpan,
   HighlightedSpanContainer,
-  NextImage,
+  ForgotPassword,
   ErrorMessage,
 } from './AuthForm.styles'
-import formsPic from '@/public/images/login/forms-pic.jpg'
+import AuthInput from '../AuthInput/AuthInput'
 import OutsideProvidersAuth from '../OutsideProvidersAuth/OutsideProvidersAuth'
+import AuthModal from '../AuthModal/AuthModal'
 import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
+import { InputTypes, AuthFormInputs, AuthMethods } from '@/types/authTypes'
 
-YupPassword(yup)
-
-type AuthFormInputsData = {
-  username?: string
-  email: string
-  password: string
+type InputsProps = {
+  name: InputTypes
+  type: string
 }
 
 type AuthFormProps = {
   title: string
-  setAuthMethod: (method: 'login' | 'signup') => void
-  onSubmit: (data: AuthFormInputsData) => void
+  inputs: Array<InputsProps>
+  btnText: string
+  setAuthMethod: (method: AuthMethods) => void
+  onSubmit: (data: AuthFormInputs) => void
   schema: yup.AnyObjectSchema
-  errorCode: string
-  setErrorCode: (arg0: string) => void
+  error: string
+  setError: (arg0: string) => void
+  isLinkSent?: boolean
+  setIsLinkSet?: (arg0: boolean) => void
 }
 
 const AuthForm = ({
   title,
+  inputs,
+  btnText,
   setAuthMethod,
   onSubmit,
   schema,
-  errorCode,
-  setErrorCode,
+  error,
+  setError,
+  isLinkSent,
+  setIsLinkSet,
 }: AuthFormProps) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthFormInputsData>({ resolver: yupResolver(schema) })
-  const [modal, contextHolder] = Modal.useModal()
+  } = useForm<AuthFormInputs>({ resolver: yupResolver(schema) })
 
-  const onFormSubmit = (data: AuthFormInputsData) => {
-    if (errorCode) {
-      showModal()
-    } else {
-      onSubmit(data)
-    }
+  const renderLink = (title: string, setAuthMethod: (method: AuthMethods) => void) => {
+    const linkText =
+      title === 'Log In'
+        ? { main: 'New to Language Bridge?', action: 'Sign up', method: AuthMethods.Login }
+        : title === 'Sign Up'
+        ? { main: 'Already have an account?', action: 'Log In', method: AuthMethods.Signup }
+        : { main: 'Return to', action: 'Log In', method: AuthMethods.Login }
+
+    return (
+      <>
+        {linkText.main}{' '}
+        <HighlightedSpan onClick={() => setAuthMethod(linkText.method)}>
+          {linkText.action}
+        </HighlightedSpan>
+      </>
+    )
   }
-
-  const showModal = () => {
-    const errorMessage = getMessageFromErrorCode(errorCode)
-
-    modal.error({
-      title: 'Error!',
-      content: <ErrorMessage>{errorMessage}</ErrorMessage>,
-      centered: true,
-      onOk: () => {
-        setErrorCode('')
-      },
-    })
-  }
-
-  useEffect(() => {
-    if (errorCode) {
-      showModal()
-    }
-  })
 
   return (
     <>
-      <NextImage
-        src={formsPic}
-        alt="Two people learning"
-        priority={true}
-        height={100}
-        width={100}
-        unoptimized
-      />
-      <SForm onSubmit={handleSubmit(onFormSubmit)}>
+      <SForm onSubmit={handleSubmit(onSubmit)}>
         <h2>{title}</h2>
-        {schema.fields.username && (
-          <div>
-            <Typography.Title level={5}>Username</Typography.Title>
-            <Controller
-              control={control}
-              name="username"
-              render={({ field: { onChange, onBlur } }) => (
-                <>
-                  <Input
-                    size="large"
-                    placeholder="Enter your username"
-                    type="text"
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    status={errors.username ? 'error' : ''}
-                  />
-                  {errors.username && <ErrorMessage>{errors.username?.message}</ErrorMessage>}
-                </>
-              )}
-            ></Controller>
-          </div>
+
+        {inputs.map((input) => {
+          const { name, type } = input
+          return <AuthInput key={name} control={control} name={name} type={type} errors={errors} />
+        })}
+
+        {title === 'Log In' && (
+          <ForgotPassword onClick={() => setAuthMethod(AuthMethods.PasswordReset)}>
+            Forgot Password?
+          </ForgotPassword>
         )}
-        <div>
-          <Typography.Title level={5}>Email</Typography.Title>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, onBlur } }) => (
-              <>
-                <Input
-                  size="large"
-                  placeholder="Enter your email"
-                  type="text"
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  status={errors.email ? 'error' : ''}
-                />
-                {errors.email && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
-              </>
-            )}
-          ></Controller>
-        </div>
-        <div>
-          <Typography.Title level={5}>Password</Typography.Title>
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur } }) => (
-              <>
-                <Input
-                  size="large"
-                  placeholder="Enter your password"
-                  type="password"
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  status={errors.password ? 'error' : ''}
-                  autoComplete="on"
-                />
-                {errors.password && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
-              </>
-            )}
-          ></Controller>
-        </div>
+
         <Btn size="large" htmlType="submit">
-          {title}
+          {btnText}
         </Btn>
-        <OutsideProvidersAuth />
-        <HighlightedSpanContainer>
-          {title === 'Log In' ? (
-            <>
-              New to Language Bridge?{' '}
-              <HighlightedSpan onClick={() => setAuthMethod('signup')}>Sign up</HighlightedSpan>
-            </>
-          ) : (
-            <>
-              Already have an account?{' '}
-              <HighlightedSpan onClick={() => setAuthMethod('login')}>Log In</HighlightedSpan>
-            </>
-          )}
-        </HighlightedSpanContainer>
+
+        {title !== 'Password Reset' && <OutsideProvidersAuth />}
+
+        <HighlightedSpanContainer>{renderLink(title, setAuthMethod)}</HighlightedSpanContainer>
+
+        <AuthModal
+          title="Error!"
+          type="error"
+          content={<ErrorMessage>{getMessageFromErrorCode(error)}</ErrorMessage>}
+          onOk={() => setError('')}
+          isVisible={error ? true : false}
+        />
+        <AuthModal
+          title="Link was sent!"
+          type="info"
+          content="Please, check your inbox for a password reset link."
+          onOk={() => (setIsLinkSet ? setIsLinkSet(false) : undefined)}
+          isVisible={isLinkSent ?? false}
+        />
       </SForm>
-      {contextHolder}
     </>
   )
 }

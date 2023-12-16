@@ -1,4 +1,4 @@
-import { TextProps } from '@/interfaces/TextProps'
+import { TextProps } from '@/types/TextProps'
 import { TextItem, NextImage, AntButton, UpperContainer, LowerContainer } from './SingleText.style'
 import { RightOutlined } from '@ant-design/icons'
 import { ConfigProvider } from 'antd'
