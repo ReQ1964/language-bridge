@@ -2,8 +2,7 @@ import { Input, Typography } from 'antd'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import capitalizeWord from '@/utils/capitalizeWord'
 import { ErrorMessage } from '../AuthForm/AuthForm.styles'
-import { InputTypes } from '@/types/Auth/InputTypes'
-import { AuthFormInputs } from '@/types/Auth/AuthFormInputs'
+import { AuthFormInputs, InputTypes } from '@/types/authTypes'
 
 type AuthInputProps = {
   control: Control<AuthFormInputs>

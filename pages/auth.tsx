@@ -1,6 +1,15 @@
-import * as yup from 'yup'
 import { useState } from 'react'
+import { auth } from '@/firebase/config'
+import {
+  AuthMethods,
+  SignUpFormInputs,
+  LogInFormInputs,
+  PasswordResetFormInputs,
+} from '@/types/authTypes'
+import { signUpSchema, loginSchema, passwordResetSchema } from '@/yupSchema/auth.schema'
 import withRouteProtection from '@/utils/withRouteProtection'
+import { handleAuthError } from '@/utils/handleAuthError'
+
 import AuthForm from '@/components/Auth/AuthForm/AuthForm'
 import {
   createUserWithEmailAndPassword,
@@ -9,81 +18,35 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth'
 import { TopImage } from '@/components/Auth/AuthForm/AuthForm.styles'
-import { auth } from '@/firebase/config'
 import formsPic from '@/public/images/login/forms-pic.jpg'
-import AuthModal from '@/components/Auth/AuthModal/AuthModal'
-import { ErrorMessage } from '@/components/Auth/AuthForm/AuthForm.styles'
-import { getMessageFromErrorCode } from '@/utils/getMessageFromAuthError'
-
-enum AuthMethods {
-  Login = 'login',
-  Signup = 'signup',
-  PasswordReset = 'password-reset',
-}
 
 const AuthPage = () => {
   const [authMethod, setAuthMethod] = useState(AuthMethods.Login)
-  const [errorCode, setErrorCode] = useState('')
+  const [error, setError] = useState('')
   const [isLinkSent, setIsLinkSent] = useState(false)
 
-  const handleAuthError = (error: { code: string }) => {
-    console.error(`Authentication error: ${error.code}`)
-    setErrorCode(error.code)
-  }
-
-  type SignUpFormInputsData = {
-    username?: string
-    email: string
-    password: string
-  }
-
-  const signUpSchema = yup.object().shape({
-    username: yup
-      .string()
-      .min(3, 'username must be at least 3 characters')
-      .required('username is required'),
-    email: yup.string().email('email must be valid').required('email is required'),
-    password: yup.string().password().required('password is required'),
-  })
-
-  const onSignUp = (data: SignUpFormInputsData) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
+  const onSignUp = ({ email, password, username }: SignUpFormInputs) => {
+    createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         if (auth.currentUser) {
           updateProfile(auth.currentUser, {
-            displayName: data.username,
+            displayName: username,
           })
         }
       })
-      .catch(handleAuthError)
+      .catch((error) => handleAuthError(error.code, setError))
   }
 
-  type LogInFormInputsData = {
-    email: string
-    password: string
+  const onLogin = ({ email, password }: LogInFormInputs) => {
+    signInWithEmailAndPassword(auth, email, password).catch((error) =>
+      handleAuthError(error.code, setError)
+    )
   }
 
-  const loginSchema = yup.object().shape({
-    email: yup.string().email().required('email is required'),
-    password: yup.string().required('password is required'),
-  })
-
-  const onLogin = (data: LogInFormInputsData) => {
-    signInWithEmailAndPassword(auth, data.email, data.password).catch(handleAuthError)
-  }
-
-  type PasswordResetFormInputsData = {
-    email: string
-  }
-
-  const passwordResetSchema = yup.object().shape({
-    email: yup.string().email().required('emial is required'),
-  })
-
-  const onPasswordReset = (data: PasswordResetFormInputsData) => {
-    sendPasswordResetEmail(auth, data.email)
+  const onPasswordReset = ({ email }: PasswordResetFormInputs) => {
+    sendPasswordResetEmail(auth, email)
       .then(() => setIsLinkSent(true))
-      .catch(handleAuthError)
+      .catch((error) => handleAuthError(error.code, setError))
   }
 
   return (
@@ -96,6 +59,7 @@ const AuthPage = () => {
         width={100}
         unoptimized
       />
+
       {authMethod === AuthMethods.Login && (
         <AuthForm
           title="Log In"
@@ -107,8 +71,11 @@ const AuthPage = () => {
           setAuthMethod={setAuthMethod}
           onSubmit={onLogin}
           schema={loginSchema}
+          error={error}
+          setError={setError}
         />
       )}
+
       {authMethod === AuthMethods.Signup && (
         <AuthForm
           title="Sign Up"
@@ -121,8 +88,11 @@ const AuthPage = () => {
           setAuthMethod={setAuthMethod}
           onSubmit={onSignUp}
           schema={signUpSchema}
+          error={error}
+          setError={setError}
         />
       )}
+
       {authMethod === AuthMethods.PasswordReset && (
         <AuthForm
           title="Password Reset"
@@ -131,22 +101,12 @@ const AuthPage = () => {
           setAuthMethod={setAuthMethod}
           onSubmit={onPasswordReset}
           schema={passwordResetSchema}
+          error={error}
+          setError={setError}
+          isLinkSent={isLinkSent}
+          setIsLinkSet={setIsLinkSent}
         />
       )}
-      <AuthModal
-        title="Error!"
-        type="error"
-        content={<ErrorMessage>{getMessageFromErrorCode(errorCode)}</ErrorMessage>}
-        onOk={() => setErrorCode('')}
-        isVisible={errorCode ? true : false}
-      />
-      <AuthModal
-        title="Link was sent!"
-        type="info"
-        content="Please, check your inbox for a password reset link."
-        onOk={() => setIsLinkSent(false)}
-        isVisible={isLinkSent}
-      />
     </>
   )
 }
