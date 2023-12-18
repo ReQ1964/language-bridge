@@ -54,9 +54,9 @@ const AuthForm = ({
   const renderLink = (title: string, setAuthMethod: (method: AuthMethods) => void) => {
     const linkText =
       title === 'Log In'
-        ? { main: 'New to Language Bridge?', action: 'Sign up', method: AuthMethods.Login }
+        ? { main: 'New to Language Bridge?', action: 'Sign Up', method: AuthMethods.Signup }
         : title === 'Sign Up'
-        ? { main: 'Already have an account?', action: 'Log In', method: AuthMethods.Signup }
+        ? { main: 'Already have an account?', action: 'Log In', method: AuthMethods.Login }
         : { main: 'Return to', action: 'Log In', method: AuthMethods.Login }
 
     return (

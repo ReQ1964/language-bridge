@@ -7,4 +7,4 @@ const AccountPage = () => {
   return <button onClick={() => signOut(auth)}>Click to logout</button>
 }
 
-export default withRouteProtection(AccountPage, '/auth', false)
+export default withRouteProtection(AccountPage, '/auth', true)

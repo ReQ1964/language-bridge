@@ -16,7 +16,7 @@ const withRouteProtection = (
 
     useLayoutEffect(() => {
       onAuthStateChanged(auth, (user) => {
-        if (requireAuth ? user : !user) {
+        if (requireAuth ? !user : user) {
           router.replace(redirectRoute)
         } else {
           setIsLoading(false)
