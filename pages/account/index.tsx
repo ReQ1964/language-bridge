@@ -1,10 +1,14 @@
-import React from 'react'
-import { signOut } from 'firebase/auth'
-import { auth } from '@/firebase/config'
 import withRouteProtection from '@/utils/withRouteProtection'
+import UserProfile from '@/components/Account/UserProfile/UserProfile'
+import AccountOptions from '@/components/Account/AccountOptions/AccountOptions'
 
 const AccountPage = () => {
-  return <button onClick={() => signOut(auth)}>Click to logout</button>
+  return (
+    <section>
+      <UserProfile />
+      <AccountOptions />
+    </section>
+  )
 }
 
 export default withRouteProtection(AccountPage, '/auth', true)
