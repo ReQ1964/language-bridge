@@ -7,7 +7,7 @@ const TextItem = styled.li`
   flex-direction: column;
   gap: 1rem;
   text-align: left;
-  padding: 1.6rem;
+  padding: 2rem;
   border-bottom: 1px solid #e6e6e6;
   &:nth-of-type(1) {
     border-top: 1px solid #e6e6e6;

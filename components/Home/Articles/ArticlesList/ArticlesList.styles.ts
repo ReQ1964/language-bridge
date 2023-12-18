@@ -5,7 +5,7 @@ const ArticlesUL = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 1.5rem;
+  padding: 2rem;
   padding-top: 2rem;
 `
 const ArticlesSection = styled.section`

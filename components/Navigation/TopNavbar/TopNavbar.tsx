@@ -5,12 +5,18 @@ import Logo from '@/components/Reusable/Logo/Logo'
 import LanguagePicker from '@/components/Navigation/LanguagePicker/LanguagePicker'
 import menu_account from '@/public/icons/navigation/menu_account.svg'
 import { Navbar, RightContainer, AccountIcon } from './TopNavbar.styles'
+import { useRouter } from 'next/router'
 
 const TopNavbar = () => {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleNavigationLinks = () => {
     setIsOpen((prevState) => !prevState)
+  }
+
+  const redirectToAccountPage = () => {
+    router.push('/account')
   }
 
   return (
@@ -24,6 +30,7 @@ const TopNavbar = () => {
             width={29}
             height={29}
             alt="Icon to go to the account page"
+            onClick={redirectToAccountPage}
           />
           <LanguagePicker />
         </RightContainer>
