@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import ThemesProvider from '@/theme/ThemesProvider'
 import { composeStories } from '@storybook/react'
 import * as stories from './TopNavbar.stories'
+import mockRouter from 'next-router-mock'
 
 const { Default } = composeStories(stories)
 
@@ -37,5 +38,16 @@ describe('TopNavbar', () => {
 
     const navLinks = screen.getByRole('list')
     expect(navLinks).toHaveStyle(`transform: translateY(-40%)`)
+  })
+
+  it('should redirect to account page on account_icon click', async () => {
+    mockRouter.push('/')
+    const accountIcon = screen.getByAltText(/Icon to go to the account page/i)
+
+    await userEvent.click(accountIcon)
+
+    expect(mockRouter).toMatchObject({
+      pathname: '/account/',
+    })
   })
 })

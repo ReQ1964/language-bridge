@@ -9,14 +9,6 @@ const { Default } = composeStories(stories)
 
 vi.mock('next/router', () => require('next-router-mock'))
 
-vi.mock('firebase/app', () => {
-  return {
-    auth: {
-      signOut: vi.fn(),
-    },
-  }
-})
-
 describe('AccountOptions Component', () => {
   beforeEach(() => {
     render(

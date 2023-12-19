@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 const AccountOptions = () => {
   const router = useRouter()
 
-  const SignOut = () => () => signOut(auth)
+  const SignOut = () => signOut(auth)
 
   const GoToProfilePage = () => {
     router.push('/account/profile')
