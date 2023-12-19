@@ -1,11 +1,11 @@
 import withRouteProtection from '@/utils/withRouteProtection'
-import UserProfile from '@/components/Account/UserProfile/UserProfile'
+import UserInfo from '@/components/Account/UserInfo/UserInfo'
 import AccountOptions from '@/components/Account/AccountOptions/AccountOptions'
 
 const AccountPage = () => {
   return (
     <section>
-      <UserProfile />
+      <UserInfo />
       <AccountOptions />
     </section>
   )

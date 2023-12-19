@@ -1,7 +1,7 @@
 import { auth } from '@/firebase/config'
-import { UserAvatar, ProfileContainer } from './UserProfile.styles'
+import { UserAvatar, ProfileContainer } from './UserInfo.styles'
 
-const UserProfile = () => {
+const UserInfo = () => {
   const currentUserName = auth.currentUser?.displayName
   const currentUserFirstLetter = currentUserName?.charAt(0).toUpperCase()
   return (
@@ -14,4 +14,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default UserInfo
