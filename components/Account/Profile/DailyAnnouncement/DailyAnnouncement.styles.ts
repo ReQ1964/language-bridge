@@ -8,7 +8,7 @@ const DailyAnnoucementContainer = styled.article`
   background-color: ${(props) => props.theme.colors.background.primary.color};
   border-radius: 0.5rem;
   color: white;
-  padding: 1rem;
+  padding: 1.8rem 1rem;
   margin: ${(props) => props.theme.sizes.defaultMargins};
   img {
     height: 100%;

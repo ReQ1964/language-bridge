@@ -1,13 +1,11 @@
 import withRouteProtection from '@/utils/withRouteProtection'
-import useBackNavigation from '@/hooks/useBackNavigation'
 import DailyAnnouncement from '@/components/Account/Profile/DailyAnnouncement/DailyAnnouncement'
+import BackNavigationBar from '@/components/Reusable/BackNavigationBar/BackNavigationBar'
 
 const ProfilePage = () => {
-  const { goBack } = useBackNavigation()
-
   return (
     <section>
-      <p onClick={goBack}> Back</p>
+      <BackNavigationBar currentPageName="My Profile" />
       <DailyAnnouncement wordsQuantity={10} textsQuantity={10} />
     </section>
   )
