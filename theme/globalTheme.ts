@@ -23,6 +23,9 @@ interface DefaultTheme {
       }
     }
   }
+  sizes: {
+    defaultMargins: string
+  }
 }
 
 const globalTheme: DefaultTheme = {
@@ -49,6 +52,9 @@ const globalTheme: DefaultTheme = {
         tint2: '#F5D692',
       },
     },
+  },
+  sizes: {
+    defaultMargins: '1.2rem',
   },
 }
 
