@@ -26,6 +26,13 @@ interface DefaultTheme {
   sizes: {
     defaultMargins: string
   }
+  breakpoints: {
+    xs: string
+    sm: string
+    md: string
+    lg: string
+    xl: string
+  }
 }
 
 const globalTheme: DefaultTheme = {
@@ -55,6 +62,13 @@ const globalTheme: DefaultTheme = {
   },
   sizes: {
     defaultMargins: '1.2rem',
+  },
+  breakpoints: {
+    xs: '0px', // Extra small devices
+    sm: '576px', // Small devices
+    md: '768px', // Medium devices
+    lg: '992px', // Large devices
+    xl: '1200px', // Extra large devices
   },
 }
 

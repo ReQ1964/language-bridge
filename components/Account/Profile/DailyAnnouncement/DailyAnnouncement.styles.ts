@@ -18,4 +18,8 @@ const DailyAnnoucementContainer = styled.article`
   }
 `
 
-export { DailyAnnoucementContainer }
+const ProfileSection = styled.section`
+  background-color: ${(props) => props.theme.colors.background.primary.tint1};
+`
+
+export { DailyAnnoucementContainer, ProfileSection }
