@@ -2,9 +2,9 @@ import useStore from '@/store/store'
 import gb_icon from '@/public/icons/flags/gb.svg'
 import es_icon from '@/public/icons/flags/es.svg'
 import Image from 'next/image'
-import { Progress } from 'antd'
 import { ProgressTileContainer, LanguageContainer, LanguageParagraph } from './ProgressTile.styles'
 import capitalizeWord from '@/utils/capitalizeWord'
+import ProgressBar from '../ProgressBar/ProgressBar'
 
 const ProgressTile = ({ wordsQuantity }: { wordsQuantity: number }) => {
   const currentLanguage = useStore((state) => state.currentLanguage)
@@ -15,7 +15,7 @@ const ProgressTile = ({ wordsQuantity }: { wordsQuantity: number }) => {
 
   return (
     <ProgressTileContainer>
-      <Progress type="dashboard" percent={75} />
+      <ProgressBar wordsCount={40003} />
       <LanguageParagraph>
         Fluency in
         <LanguageContainer>

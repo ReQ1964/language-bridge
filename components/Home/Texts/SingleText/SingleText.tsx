@@ -23,7 +23,7 @@ const SingleText = ({ title, snippet, image, imageAlt, level }: TextProps) => {
         </UpperContainer>
         <LowerContainer>
           <AntButton icon={<RightOutlined />}>Start reading</AntButton>
-          <LanguageLevelIcon level={level} width={48} height={48} />
+          <LanguageLevelIcon level={level} type="filled" width={48} height={48} />
         </LowerContainer>
       </TextItem>
     </ConfigProvider>
