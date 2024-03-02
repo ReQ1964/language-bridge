@@ -8,9 +8,9 @@ const SForm = styled.form`
   max-width: 600px;
   gap: 1rem;
   padding: 1.2rem;
-  margin: 1.2rem;
   border-radius: 1rem;
   background-color: ${(props) => props.theme.colors.background.primary.tint1};
+  margin: 2rem auto;
   h4 {
     text-align: center;
   }
@@ -38,11 +38,11 @@ const HighlightedSpanContainer = styled.p`
 
 const TopImage = styled(Image)`
   display: block;
-  width: 100%;
+  width: 90%;
   height: 80%;
   max-width: 600px;
   max-height: 600px;
-  margin: 0 auto 2rem;
+  margin: 2rem auto;
 `
 
 const ErrorMessage = styled.p`

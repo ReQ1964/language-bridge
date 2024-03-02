@@ -9,13 +9,26 @@ const HeroSection = styled.section`
   align-items: center;
   text-align: center;
   gap: 1rem;
-  padding: 2rem 1rem;
+  padding: 4rem 2rem;
   color: white;
   background-image: linear-gradient(
     to right,
     ${(props) => props.theme.colors.background.primary.color},
     #3f8feb
   );
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.md}) {
+    flex-direction: row;
+    text-align: left;
+    div {
+      align-items: flex-start;
+    }
+  }
 `
 
 const Button = styled(AntDButton)`

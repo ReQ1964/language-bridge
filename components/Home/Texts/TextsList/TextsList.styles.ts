@@ -5,18 +5,29 @@ const TextsSection = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 2rem;
 `
 
 const TextsHeading = styled.h3`
   color: ${(props) => props.theme.colors.text.tertiary};
-  margin: 3rem 0 1rem 1rem;
   align-self: flex-start;
+  max-width: 500px;
+  padding-bottom: 1rem;
 `
 
 const TextsUl = styled.ul`
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 2rem;
+  @media (min-width: ${(props) => props.theme.breakpoints.md}) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.lg}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.xl}) {
+    gap: 3rem;
+  }
 `
 
 export { TextsUl, TextsHeading, TextsSection }

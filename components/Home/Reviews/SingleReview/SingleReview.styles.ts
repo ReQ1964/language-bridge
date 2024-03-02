@@ -11,6 +11,8 @@ const ReviewArticle = styled.article`
   padding: 1rem;
   max-height: 400px;
   min-height: 350px;
+  max-width: 300px;
+  margin: 0 auto;
   p:nth-of-type(1) {
     overflow: hidden;
   }

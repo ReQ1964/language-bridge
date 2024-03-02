@@ -8,7 +8,18 @@ const ReviewsList = ({ reviews }: { reviews: Array<ReviewProps> }) => {
   return (
     <>
       <ReviewsHeading />
-      <ReviewsSection spaceBetween={11} slidesPerView={2}>
+      <ReviewsSection
+        slidesPerView={1}
+        spaceBetween={20}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
+      >
         {reviews.map((review: ReviewProps) => {
           return (
             <SwiperSlide key={Math.random()}>

@@ -21,9 +21,11 @@ const Hero = () => {
       }}
     >
       <HeroSection>
-        <h1>Studying Online is now much easier</h1>
-        <p>Learn everyday language in context. Let&apos;s connect and bridge the gap!</p>
-        <Button onClick={goToLoginPage}>Login</Button>
+        <div>
+          <h1>Studying Online is now much easier</h1>
+          <p>Learn everyday language in context. Let&apos;s connect and bridge the gap!</p>
+          <Button onClick={goToLoginPage}>Login</Button>
+        </div>
         <NextImage
           src={hero_online_studying}
           height={100}

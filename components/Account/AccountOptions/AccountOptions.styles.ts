@@ -5,6 +5,9 @@ const OptionsList = styled.ul`
   flex-direction: column;
   gap: 1rem;
   padding: 1.6rem;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 40vh;
 `
 
 const Option = styled.li`

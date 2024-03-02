@@ -27,11 +27,11 @@ interface DefaultTheme {
     defaultMargins: string
   }
   breakpoints: {
-    xs: string
     sm: string
     md: string
     lg: string
     xl: string
+    xxl: string
   }
 }
 
@@ -64,11 +64,11 @@ const globalTheme: DefaultTheme = {
     defaultMargins: '1.2rem',
   },
   breakpoints: {
-    xs: '0px', // Extra small devices
-    sm: '576px', // Small devices
-    md: '768px', // Medium devices
-    lg: '992px', // Large devices
-    xl: '1200px', // Extra large devices
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    xxl: '1536px',
   },
 }
 

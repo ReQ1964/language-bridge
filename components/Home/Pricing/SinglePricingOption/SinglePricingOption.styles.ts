@@ -8,8 +8,7 @@ const PricingOption = styled.div<{ $featured?: boolean }>`
   padding: 1.5rem;
   border: ${(props) => (props.$featured ? '1.5px solid black' : '1px solid gray')};
   border-radius: 0.8rem;
-  min-height: 320px;
-  max-height: 400px;
+  height: ${(props) => (props.$featured ? '450px' : '350px')};
   box-shadow: ${(props) => (props.$featured ? '8px 8px 23px -16px rgba(66, 68, 90, 1)' : null)};
 `
 
