@@ -26,39 +26,45 @@ const meta: Meta<typeof LanguageLevelIcon> = {
 export default meta
 type Story = StoryObj<typeof LanguageLevelIcon>
 
-export const A1: Story = {
+export const A1_Filled: Story = {
   args: {
     level: 'a1',
+    type: 'filled',
     ...defaultSizes,
   },
 }
-export const A2: Story = {
+export const A2_Filled: Story = {
   args: {
     level: 'a2',
+    type: 'filled',
     ...defaultSizes,
   },
 }
-export const B1: Story = {
+export const B1_Filled: Story = {
   args: {
     level: 'b1',
+    type: 'filled',
     ...defaultSizes,
   },
 }
-export const B2: Story = {
+export const B2_Blank: Story = {
   args: {
     level: 'b2',
+    type: 'blank',
     ...defaultSizes,
   },
 }
-export const C1: Story = {
+export const C1_Blank: Story = {
   args: {
     level: 'c1',
+    type: 'blank',
     ...defaultSizes,
   },
 }
-export const C2: Story = {
+export const C2_Blank: Story = {
   args: {
     level: 'c2',
+    type: 'blank',
     ...defaultSizes,
   },
 }

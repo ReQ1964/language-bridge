@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 
 const LanguageLevelAssessment = ({ language }: { language: 'english' | 'spanish' }) => {
   const router = useRouter()
+
   const icon =
     language === 'english' ? (
       <Image src={gb_icon} width={22} height={22} alt="Flag of the United Kingdom" />

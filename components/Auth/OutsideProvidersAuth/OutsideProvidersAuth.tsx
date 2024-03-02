@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { IconsContainer, ProvidersHeading } from './OutsideProvidersAuth.styles'
-import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, getRedirectResult } from 'firebase/auth'
 import { auth } from '@/firebase/config'
 import googleIcon from '@/public/icons/socials/google.svg'
 import Image from 'next/image'
@@ -13,7 +13,7 @@ const OutsideProvidersAuth = () => {
   const [errorCode, setErrorCode] = useState('')
 
   const signInWithGoogle = () => {
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
   }
 
   useEffect(() => {

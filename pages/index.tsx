@@ -51,7 +51,7 @@ const HomePage = ({ articles, reviews, pricingOptions }: HomePageProps) => {
       <ArticlesList articles={articles} />
       <TextsList texts={data || []} isLoading={isLoading} error={error} />
       <ReviewsList reviews={reviews} />
-      <LanguageLevelAssessment language="spanish" />
+      <LanguageLevelAssessment language={currentLanguage} />
       <PricingOptions pricingOptions={pricingOptions} />
     </>
   )

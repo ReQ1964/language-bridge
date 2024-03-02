@@ -4,9 +4,13 @@ import bg from '@/public/images/background-elements/vectorblock.png'
 const ArticlesUL = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding: 1.5rem;
-  padding-top: 2rem;
+  justify-items: center;
+  align-items: center;
+  gap: 5rem;
+  padding: 3rem;
+  @media (min-width: ${(props) => props.theme.breakpoints.lg}) {
+    gap: 10rem;
+  }
 `
 const ArticlesSection = styled.section`
   background-image: url(${bg.src});

@@ -5,9 +5,13 @@ const AssessmentContainer = styled.article`
   display: flex;
   margin-top: 2rem;
   max-width: 450px;
-  margin: 2rem auto;
+  margin: 6rem auto;
   border-radius: 1.2rem;
   padding: 0 1rem;
+  @media (min-width: ${(props) => props.theme.breakpoints.md}) {
+    max-width: 1000px;
+    height: 100px;
+  }
 `
 
 const AntDButton = styled(Button)`
@@ -15,6 +19,9 @@ const AntDButton = styled(Button)`
   color: ${(props) => props.theme.colors.text.secondary};
 `
 const LeftContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 60%;
   background-color: ${(props) => props.theme.colors.background.primary.tint1};
   padding: 1.2rem;

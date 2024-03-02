@@ -12,8 +12,16 @@ const PricingOptions = ({ pricingOptions }: { pricingOptions: Array<PricingProps
     <>
       <PricingHeading />
       <PricingSection
-        spaceBetween={11}
         slidesPerView={1}
+        spaceBetween={20}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
         pagination={{ dynamicBullets: true }}
         modules={[Pagination]}
       >

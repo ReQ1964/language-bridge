@@ -23,6 +23,16 @@ interface DefaultTheme {
       }
     }
   }
+  sizes: {
+    defaultMargins: string
+  }
+  breakpoints: {
+    sm: string
+    md: string
+    lg: string
+    xl: string
+    xxl: string
+  }
 }
 
 const globalTheme: DefaultTheme = {
@@ -49,6 +59,16 @@ const globalTheme: DefaultTheme = {
         tint2: '#F5D692',
       },
     },
+  },
+  sizes: {
+    defaultMargins: '1.2rem',
+  },
+  breakpoints: {
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    xxl: '1536px',
   },
 }
 

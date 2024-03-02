@@ -111,4 +111,4 @@ const AuthPage = () => {
   )
 }
 
-export default withRouteProtection(AuthPage, '/account', true)
+export default withRouteProtection(AuthPage, '/account', false)

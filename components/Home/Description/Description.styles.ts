@@ -7,10 +7,9 @@ const DescriptionSection = styled.section`
   align-items: center;
   text-align: center;
   gap: 1rem;
-  padding: 3rem 0.8rem;
-  margin-top: 2rem;
-  border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 3rem 2.5rem;
+  max-width: 700px;
+  margin: 2rem auto 0;
   h1 {
     color: ${(props) => props.theme.colors.text.tertiary};
   }
